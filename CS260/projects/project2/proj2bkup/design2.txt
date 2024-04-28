@@ -1,0 +1,144 @@
+Design Document: Project 2
+Author: Jamie Dang
+Date: 4/22/24
+
+Purpose: Create a program that keeps track of who is in line
+at the restaurant, including how long it will take to get to a
+table. This will be done through a Queue ADT. We will use a 
+Stack ADT to reach out to customers that come to the restaurant
+most frequently, to provide promotional materials.
+
+Test Plan:
+Welcome to the Restauraunt Queue Tracker!
+
+Menu Options:
+(1) Enter a new group (enqueue)
+(2) Seat next group (dequeue)
+(3) Display number in line
+(4) Peek at next group
+(5) (Manager Only) Edit Promotional Data
+(6) Quit
+
+If (1) is selected:
+Please enter the following information for the new group:
+
+Name of Group:
+Number of people in the group:
+Enter special seating needs (h for high chair, w for wheel chair, n for none):
+Would you like to receive coupons/other promotional materials? (Y/N):
+[if Y/y, show the following: 
+"Enter your full name: "
+"Enter your email address: "]
+
+Group successfully seated!
+[If the group wanted promos, we will also write "Group added to promo list!"]
+
+[NOTE: seating a group of people should push promo data to a stack, if they want to be
+on the promo list]
+
+If (2) is selected: 
+Group named "[group name]" is now seated. There are [number of groups] left in line.
+
+If (3) is selected:
+[List all groups by index (1st in line, 2nd, etc), and list out 
+name, number, and seating needs.)]
+
+If (4) is selected:
+[Print out name, number of people in group, and special seating needs,
+of the next group in line]
+
+if (5) is selected: [Print out the following menu]
+(A) Remove Recent Entry 
+(B) Display All Entries
+(C) Display Next Entry
+
+[A: allows manager to pop the stack, removing the top entry
+and saving it to promos.txt]
+[B: allows manager to view all entries in the stack so far, including
+index, name, and email]
+[C: allows manager to view the next entry in the stack, including name
+and email.] 
+
+if (6) is selected:
+Thank you for using the Restauraunt Queue Tracker!
+"promos.txt." has been updated.
+
+NOTE: The program will re-prompt if necessary, based on invalid data
+(such as a negative number for the group number, non-matching data types, 
+etc.)
+
+Part 0: The Group ADT
+The Group ADT will represent groups of people who are in line.
+A single Group ADT should hold the following data:
+- Name of the Group (char array)
+- Number of people in the Group (integer)
+- If anybody needs special seating (if so, include the information about
+  the requirements) [char]
+- If the group would like to receive coupons/other promotional materials
+  (if so, include the contact name (full) and email address) [boolean and char array]
+This ADT should have a default constructor, parameterized constructor with all parameters,
+and a destructor. Group ADT objects will be used in the Queue ADT. 
+
+NOTE: for the 4th bullet point, the group ADT will ONLY include the boolean. The stack will 
+have two char arrays to hold the name and email address.
+
+Part 1: The Queue ADT
+The Queue ADT will represent the people in line waiting for a table.
+The queue is ordered based on the order in which the groups arrive
+
+The data for the Queue ADT includes:
+- (private) Node structs that hold the following data members:
+	- a next pointer to the next node
+	- a pointer, pointing to data (the data should be a Group ADT object)
+- A rear pointer to point to the most recent group to arrive
+- Rear->next should point to the first group to arrive
+The Queue will be implemented as a circular list of people.
+
+The methods to be implemented are as follows:
+1. Enqueue: used to add people to the queue as people arrive. People in line
+should be added to the end of the line.
+2. Dequeue: used to remove people from the queue as they get seated. People 
+in line should be removed from the top of the line.
+3. Peek: Examine the data of the next group of people in line (top of the line)
+4. Display: Show the number of people in line
+
+
+Part 2: The Stack ADT
+The Stack represents people interested in receiving promotional material.
+The Stack should include people's full name and email address.
+The Stack will be implemented using an array, where each element in the array 
+is a person interested in promos. The array MUST be dynamically allocated.
+If the array is full, we need to dynamically allocate a larger array
+and copy over all elements from the old array. The stack ADT will have its own
+private struct called Entry, which holds two char arrays for the full name
+and email of a person interested in promos.
+
+The constructor for the Stack ADT will receive the (initial) size of the array from 
+the client program. The destructor will deallocate all dynamically allocated
+memory. The "top" of the dynamic array (stack) is the index after the last 
+object in the array. Booleans will be used for the Stack ADT functions below 
+to represent successful operations.
+
+Stack ADT functions are as follows:
+1. Push: add data from a Group to be the top entry of the array
+2. Pop: remove 1 entry from the top of the array
+3. Peek: display the data of the entry at the top of the array
+4. Display: print out the entire stack
+
+When a group gets seated at the table, you push their info into the stack if 
+they're interested in promo materials. This will be based on the 4th bullet point in
+the Group ADT, which contains a boolean (to indicate if the group wants promos).
+If the boolean is false, no information is read. Otherwise, we make a new
+Stack ADT Entry object and add it to the stack. 
+
+The pop function will remove groups at the top (most recent) of the stack. 
+However, that data won't totally be lost. It will be saved in an external text file.  
+
+Part 3: The Driver (Test Program)
+The driver will present the test run (as written above) in a looping menu format. 
+The client will be able to test out each major function of the queue ADT. I will not put
+in the functionality for a "password" by the manager, but the menu options also allows for 
+us to test the stack ADT by popping entries off the top of it/viewing the stack. By popping
+entries off the top of the stack, we will save those entries in the promos.txt file before
+deleting them. Displaying all items in the stack allows us to test and see how the Queue and 
+Stack ADTs interact with each other. 

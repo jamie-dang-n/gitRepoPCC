@@ -1,0 +1,20 @@
+How to start GDB: write "gdb ./main", where main is the name of an executable
+
+How to run your program: write "r" in GDB to run the program
+
+How to put in a break point: write "b" in GDB followed by <filename>:<line number>. You can also put a breakpoint at a function with "b <filename>:<function>". If you have only one file, your can omit the <filename>.
+
+How to step in code: write "s"
+
+How to inspect variables: write "p" followed by the variable name
+
+How to list the code: write "l"
+
+How to view the call stack/examine individual stack frames: The call stack is where we find the stack frames that control program flow. When a function is called, it creates a stack frame that tells the computer how to return control to its caller after it has finished executing. 
+
+To get a backtrace, write "backtrace". A backtrace is a list of stack frames below the current frame. The frames will be numbered.
+
+With the numbers from backtrace, you can write "frame <number>" to change stack frames. To examine stack frames, use "info frame" to see information about the current stack frame.
+"info locals" will display the list of local variables and their values for the current stack frame.
+"info args" will display the list of arguments."
+ 

@@ -1,0 +1,156 @@
+Design Document: Project 1
+Author: Jamie Dang
+Date: 4/2/24
+
+Purpose: Create a program that keeps track of song lists. 
+Create an ADT for Song and an ADT for SongList
+
+Test Plan:
+The program should be a menu-based program with the following options:
+(1) Add Song
+(2) Edit Likes
+(3) Display all songs
+(4) Display all songs for an artist (in order of popularity)
+(5) Remove all songs with fewer than M likes
+(6) Quit
+
+When the user enters the program, it should look something like the following:
+Welcome to your SongList!
+
+Song Index		Artist Name		Song Title		Length		Likes
+...				...				...				...			...
+
+Choose an option:
+(1) Add Song
+(2) Edit Likes
+(3) Display all songs
+(4) Display all songs for an artist (in order of popularity)
+(5) Remove all songs with fewer than M likes
+(6) Quit
+
+If the user does not enter the right menu option, the program will re-prompt for input
+until the user enters a valid option.
+
+To add a song, the user needs to enter the song title, artist, and likes. If the user enters a 
+non-integer number of likes, the program will re-prompt for input until the user 
+enters a valid amount. This is the client's responsibility.
+
+To edit a song's likes, the user needs to enter the song index as listed in the menu 
+to select the right song. If the index is invalid, the client will have to
+re-prompt until the index is valid. Afterward, the user will enter the song's new number of likes.
+
+Choosing to display all songs will display all songs in the order given in the data file.
+
+Choosing to display all songs for one artist (in order of popularity) will ask the user
+for the name of an artist (whole name, not case sensitive), then print the songs by that
+artist in order of most to least popular. If the artist is not found, the program will
+communicate that to the user.
+
+In choosing to remove songs with fewer than M likes, the program will ask the user for a value M,
+then remove songs based on whether or not they are less than M. This will not print the songs.
+The removal will instead display whether or not the removal was successful.
+
+Choosing to quit will exit the program. Exiting the program will trigger an error message, and will
+save all changes to the text file. Otherwise, the program will continue to return to the menu for 
+the user to select from.
+
+In all instances, if the user enters invalid data (like character data for numerical input), the 
+program will continue to reprompt until the data input is valid. 
+
+Part 1: Song ADT
+The Song ADT will be a class with the following data members: artist name, song title, length,
+and likes.
+
+The Song ADT should include public getters and setters for each data member. The Song ADT should
+also have an overloaded operator for assignment and insertion. The insertion operator will define
+and format the way Song objects are printed. The assignment operator should be overloaded to support
+deep copies of the dyamically allocated memory for the artist's name and song title.  
+
+Part 2: Songlist ADT
+The data members for the SongList ADT are: 
+A node struct that contains a Song object and a next pointer to another node. 
+A head node pointer.
+A tail node pointer.
+An integer that holds the size of the linked list.
+
+A single SongList class object should be a linked list that contains song data in nodes. Each node
+has a next pointer that points to the next node in the linked list. The head node keeps track of 
+the first node in the list. The tail node keeps track of the last node in the list. The size 
+integer keeps track of the size of the list as it changes. The order of the linked list should be 
+in order of most popular song to least popular song. This is based on the amount of likes for each song.
+
+The public member functions should do the following:
+1. Constructor: construct and initialize the data members. I plan to have a default constructor
+and a parameterized constructor that will take in a file name and read in data from 
+the file to fill the SongList object. The parameterized constructor should call a helper function
+to insert songs sorted into the song list.
+2. Destructor: this should release all dynamic memory and reset data members to their zero/null
+equivalent value. 
+3. Add a new song: this function should take input for a new Song object and call a helper function to 
+insert the song sorted into the linked list based on popularity.
+4. Edit the number of likes in a song: this function should find a song based on user input
+for a song's index, then allow the user to edit the likes data member of the Song object
+at that point in the SongList linked list.
+5. Display all songs in the list: this function should iterate through the list and print out all
+of the song data.
+6. Display all songs for an artist (in order of popularity): this function should iterate through
+the list and print out song data ONLY if the artist that the user enters matches the 
+artist of the Song object.
+7. Remove all songs with fewer than M likes: this function will take M as an argument from the 
+user, then iterate through the list to check what songs have less than M likes. For songs with
+less than M likes, the function will call a helper function to remove a song at the position found.  
+
+Part 3: Client Driver
+First, the driver will load the test data set from an external text file at the beginning
+of the program using the parameterized constructor.
+
+Then, the driver will display the welcome message and menu. When the user enters the program, 
+it should look something like the following:
+
+Welcome to your SongList!
+
+Song Index		Artist Name		Song Title		Length		Likes
+...			...			...			...		...
+
+Choose an option:
+(1) Add Song
+(2) Edit Likes
+(3) Display all songs
+(4) Display all songs for an artist (in order of popularity)
+(5) Remove all songs with fewer than M likes
+(Q) Quit
+
+As mentioned above,the user will select any of the prompts to do the various actions. If the user
+chooses (1) they will receive the following prompt:
+
+Enter the song title (ex. Here Comes the Sun):
+Enter the artist name (ex. The Beatles):
+Enter the length (in minutes decimal form, like 5.23): 
+Enter the number of likes (in integer form, like 1000):
+
+The prompt for (2) will be as follows:
+Enter the index of the song to be edited:
+Enter the new number of likes (in integer form, like 1000):
+
+Choosing (3) will just display the songs again in the following way:
+
+Song Index		Artist Name		Song Title		Length		Likes
+...			...			...			...		...
+
+Note that the songs are in order of most popular to least popular (based on number of likes).
+
+Choosing (4) will display the songs in the same way as (3), but the songs printed will be limited
+to only the songs made by a particular artist. If the artist was not found, the client code
+will communicate that. The prompt for the artist will be as follows:
+Enter the full name of the artist to print:
+This prompt should be case insensitive and must receive the full artist's name.
+
+The prompt for (5) will be as follows:
+Enter the number of likes, M (in integer form, like 1000):
+
+Choosing (6) will send out a "thank you" message, and the program will end. There will also be a confirmation 
+message that the changes to the text file were made.
+
+In all instances, if input is the wrong type (like character input to numbers, not entering an 
+artist's full name, etc), the program will display an error message and re-prompt until input
+is valid. The responsibility of this is on the client.

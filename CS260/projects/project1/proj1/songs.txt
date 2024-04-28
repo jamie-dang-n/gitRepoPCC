@@ -1,0 +1,21 @@
+SongTitle;Artist;Length;Likes
+Someone You Loved;Lewis Capaldi;3.03;43243552
+Otro Trago - Remix;Sech;4.80;3423452
+China;Anuel AA;5.03;3234234
+Beautiful People (feat. Khalid);Ed Sheeran;3.30;2342344
+No Me Conoce - Remix;Jhay Cortez;5.15;1235631
+Soltera - Remix;Lunay;4.43;854653
+Goodbyes (Feat. Young Thug);Post Malone;2.92;656345
+I Don't Care (with Justin Bieber);Ed Sheeran;3.67;534442
+How Do You Sleep?;Sam Smith;3.67;324452
+No Guidance (feat. Drake);Chris Brown;4.35;234412
+Lalala;Y2K;2.68;234234
+boyfriend (with Social House);Ariana Grande;3.10;234234
+Piece Of Your Heart;MEDUZA;2.55;231234
+Ransom;Lil Tecca;2.18;123442
+Panini;Lil Nas X;1.92;123343
+bad guy;Billie Eilish;3.23;65463
+Callaita;Bad Bunny;4.18;45533
+Old Town Road - Remix;Lil Nas X;2.61;23423
+Truth Hurts;Lizzo;2.88;2123
+bad guy (with Justin Bieber);Billie Eilish;3.25;1234

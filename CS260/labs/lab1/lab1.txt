@@ -1,0 +1,14 @@
+lab1:
+executable-file
+hello.cpp
+lab1.txt
+makefile
+CC = g++
+CPPFLAGS = -std=c++17 -g -Wall
+OBJS = hello.o
+
+hello: ${OBJS}
+
+clean:
+	rm hello *.o
+

@@ -1,0 +1,44 @@
+// User Interface - Public Function
+bool LinkedList::del(char ch) {
+	bool success = false;
+	del(head, nullptr, ch, success);
+	if (success) {
+		size--;	
+	}
+	return success;
+}
+
+// Private Helper Function - Recursion
+void LinkedList::del(Node * curr, Node * prev, char ch, bool & success) {
+	// Recursive: if ch has not yet been found
+	// Base case: ch was found at pointer curr; relink to remove
+	if (curr) { // check that we are not accessing an empty pointer
+		if (curr->data == ch) {
+			success = true;
+			// the correct entry was found, start relinking to remove
+			if (!prev) { // delete at head
+				head = curr->next;
+			} else { // delete at end/in middle 
+				prev->next = curr->next;
+			}
+			delete curr;
+			curr = NULL;
+			prev = NULL;
+		} else {
+			del(curr->next, curr, ch, success);
+		}
+	}
+}
+
+// Application Run
+x
+y
+z
+found y
+x
+z
+did not find y
+z
+did not find y
+List is empty.
+did not find y

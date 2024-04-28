@@ -1,0 +1,48 @@
+// Delete characters in the list
+bool LinkedList::del (char ch) {
+	bool successfulDel = false;
+	Node *prev = NULL, *curr = head;
+	int idx = 0;
+	if (size != 0) {
+		// the list is not empty	
+		while (curr && idx < size && (curr->data != ch)) {
+			prev = curr;
+			curr = curr->next;
+			idx++;
+		}
+		
+		// now remove at curr
+		if (!prev) {
+			// removal at start
+			head = curr->next;
+		} else if (curr == tail) {
+			// removal at end
+			prev->next = curr->next;
+			tail = prev;
+		} else {
+			// removal in middle
+			prev->next = curr->next;
+		}
+		delete curr;
+		curr = NULL;
+		prev = NULL;
+		size--;
+		successfulDel = true;
+	}
+	return successfulDel;
+}
+
+Output:
+x
+y
+z
+found y
+
+x
+z
+did not find y
+
+z
+did not find y
+
+did not find y

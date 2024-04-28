@@ -1,0 +1,75 @@
+Name: Jamie Dang
+Assignment: Project 1
+Date: 4/8/24
+
+1. How well did the data structure selected perform for the assigned application?
+
+I felt like the linked list worked fine for the data/application I had. Since I didn't have a large
+dataset, I flet like the linked list didn't take too long to do all of its operations. I liked that 
+the list was always only as big as it needed to be to hold all of the song data. However, I didn't 
+like how many times I had to traverse through the list in this program. I feel like my program
+would have functioned much faster if my code didn't involve as much traversing. Unfortunately,
+I had a hard time figuring out how I'd avoid so much traversal, since traversing the list is
+the only way for me to access objects in the middle of the list. One method I added to try and 
+avoid having to traverse so much was my found() function in the songlist class. It is a helper
+function for my method taht displays all the songs by an artist. If an artist was not found, 
+the method that displays all the songs made by one artist wouldn't have to go through the
+trouble of both iterating through the list and printing out non-existent data. Instead, only the 
+found() function would iterate through the list, without any additional action taken. Unfortunately,
+if an artist is found, then the found() function actually adds to the system's workload. This is 
+because after an artist is found, the function will stop iterating, but then we still need to iterate
+through the entire list to print out all of the songs made by an artist. Aside from the amount of 
+traversal in the linked lists, I felt that the data structure performed fine for the assigned 
+application. I would consider a different data structure if our data set was incredibly large.
+
+2. Would a different data structure work better? If so, which one and why? ...
+
+I wonder if a dynamically allocated array would work better. This would be difficult, since 
+the main drawback of a dynamically allocated array is the amount of space that gets wasted if
+the dynamically allocated array is made too big. Besides the potential for wasted space,
+I feel that a dynamically allcoated array would work better since the elements are stored
+contiguously in memory. Thus, it's much faster to directly access memory at different indices.
+Since a lot of this application was position-based, I feel that being able to directly access memory
+(v.s. accessing memory implicitly, like traversing a linked list) would save a lot of time. 
+To solve for the potential of wasted space, I might reduce the size that the dynamically allocated 
+array gets expanded by every time it needs to grow. I don't imagine that I need to double the list size every
+time that I need to grow the list. Instead, I could start with 10-20 positions in the list, then grow by 5-10 
+positions as needed. For an actual program, I'd choose a concrete/constant number for both the starting size and the
+growth factor. For a smaller dataset, the starting value and growth factor can be smaller.
+
+In the instance of a very large data set, it'd be fine to start with a large size and grow by a larger factor,
+because more data will likely be filled up. A linked list won't be very ideal for a large data set, since 
+it takes a while to traverse the list. Thus, in a real application, where a song dataset may be very large,
+I feel like a dynamically allocated array would be the best data structure for the ADTs. 
+
+3. What was efficient about your design and use of the data structure?
+
+The most efficient part about my design was that I tried to reuse my code wherever I could. 
+To increase reusability, I focused on making my classes do exactly one operation. Thus, it 
+was easy to debug and change the code within the classes. I left the responsibility up to 
+the client to pass the classes the proper arguments for their method parameters. In doing 
+this, I feel like my classes became more efficient because they could focus on a single
+task. Since each method was so modularized, they became easier to write and clearer to read.
+
+4. What was not efficient?
+
+I feel like I could have done more to reduce the amount of traversal necessary to run my program.
+For example, I created a found() function that traverses the linked list to see if an artist name
+was found in the list. If it was, the function breaks out of the loop and moves execution to the 
+function that displays all artists. This most certainly increases the amount of traversal necessary,
+since I essentially go through the list by at least one more element than I typically would. However,
+I chose to include this function so that if the artist name was not found, the list traversal wouldn't 
+have to also print out every position it goes through. Printing a list involves traversing the list.
+Although I could've smushed both functions together (finding an artist name and printing out the songs),
+I felt that it'd include unnecessary labor/printing if no such artist exists in the list. I'm not sure
+if creating a more efficient way to weed out nonexistent artist names makes up for the additional traversal 
+time needed to find an artist, then print the artist's songs if the artist was found. 
+
+5. What would you do different if you had more time to solve the problem?
+
+If I had more time or knowledge to solve the problem, I would've wanted to come up with ways to reduce the
+amount of traversal necessary to perform operations such as printing, appending objects, removing objects,
+etc. I didn't like how much I had to rely on traversal to operate on a linked list, but unfortunately,
+that is the main drawback of linked lists! With more time and know-how, I think I could've made the program
+more efficient in how it performs its operations.
+
