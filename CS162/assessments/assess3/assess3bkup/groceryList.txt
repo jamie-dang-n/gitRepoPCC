@@ -1,8 +1,0 @@
-yogurt;6.38;2
-milk;4.99;4
-fish;8.88;2
-egg;3.88;1
-donut;1.50;3
-cookie;0.50;2
-banana;0.69;5
-apple;0.99;4
