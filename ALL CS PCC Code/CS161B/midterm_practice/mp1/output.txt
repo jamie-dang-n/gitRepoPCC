@@ -1,0 +1,37 @@
+Script started on 2023-05-05 15:30:20-07:00
+bash: cd: CS161B: No such file or directory
+bash: cd: CS161B: No such file or directory
+]0;jamie.dang@vmcslinuxprod01:~/CS161B/midterm_practice/mp1jamie.dang@vmcslinuxprod01:~/CS161B/midterm_practice/mp1 $ ./mp1.cpp[K[K[K[K
+Original List!
+65
+27
+70
+50
+90
+37
+56
+4
+81
+2
+List after inserts!
+65
+27
+69
+70
+49
+50
+89
+90
+37
+55
+56
+3
+4
+81
+1
+2
+Number of odds = 10
+]0;jamie.dang@vmcslinuxprod01:~/CS161B/midterm_practice/mp1jamie.dang@vmcslinuxprod01:~/CS161B/midterm_practice/mp1 $ exit
+exit
+
+Script done on 2023-05-05 15:30:31-07:00

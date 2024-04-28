@@ -1,0 +1,11 @@
+Script started on 2023-05-05 16:49:21-07:00
+bash: cd: CS161B: No such file or directory
+bash: cd: CS161B: No such file or directory
+]0;jamie.dang@vmcslinuxprod01:~/CS161B/midterm_practice/mp2jamie.dang@vmcslinuxprod01:~/CS161B/midterm_practice/mp2 $ exit./mp2
+Unique Values = 1
+Array Numbers After: 
+3 0 0 0 
+]0;jamie.dang@vmcslinuxprod01:~/CS161B/midterm_practice/mp2jamie.dang@vmcslinuxprod01:~/CS161B/midterm_practice/mp2 $ exit
+exit
+
+Script done on 2023-05-05 16:49:25-07:00

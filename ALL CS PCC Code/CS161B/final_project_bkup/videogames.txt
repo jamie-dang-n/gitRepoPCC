@@ -1,0 +1,10 @@
+1,Wii Sports,Wii,2006
+2,Super Mario Bros.,NES,1985
+3,Mario Kart Wii,Wii,2008
+4,Wii Sports Resort,Wii,2009
+5,Pokemon Red/Pokemon Blue,GB,1996
+6,Tetris,GB,1989
+7,New Super Mario Bros.,DS,2006
+8,Wii Play,Wii,2006
+9,New Super Mario Bros. Wii,Wii,2009
+10,Duck Hunt,NES,1984

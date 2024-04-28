@@ -1,0 +1,12 @@
+Day;task name;duration;person name;category
+30;Call dad;5;Jamie Dang;4
+5;Replace ventilation filters;2;Robbie Mitchell;1
+28;Replace ventilation filters;2;Carlos Johnston;1
+14;Replace ventilation ion filters;2;Karma Thames;1
+13;Hull debris sweep;4;Richard Moody;0
+7;Food system checkup;2;Richard Moody;2
+9;Adjust fuel rods;3;Gail Lawhead;0
+7;Computer system diagnostic;2;Kelli Weeberly;3
+15;Data Transmission and Storage;4;Carlos Johnston;3
+1;Analyze engine;10;Annie Marco;1
+

@@ -1,0 +1,9 @@
+Breed;FeedAmount;EggColor
+Half Marans;114.55;Brown
+Silkie;112.67;Bluish green
+Ameraucana;109.34;Brown
+Silkie;200.88;Pale Green
+Marans;114.55;Brown
+Silkie;112.67;Bluish green
+Ameraucana;109.34;Light Blue
+Silkie;200.88;Brown

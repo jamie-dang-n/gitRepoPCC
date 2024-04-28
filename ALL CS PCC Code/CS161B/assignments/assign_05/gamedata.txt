@@ -1,0 +1,9 @@
+Wii Sports;2006;41.49
+Super Mario Bros.;1985;29.08
+Mario Kart Wii;2008;15.85
+Wii Sports Resort;2009;15.75
+Pokemon Red/Pokemon Blue;1996;11.27
+Tetris;1989;23.2
+New Super Mario Bros.;2006;11.38
+Wii Play;2006;14.03
+Duck Hunt;1984;26.93

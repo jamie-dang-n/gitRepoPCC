@@ -1,0 +1,11 @@
+Day;task name;duration;person name;category
+1;Plan out Astronaut Potluck;2;Ashley Johnson;4
+28;Replace ventilation filters;2;Carlos Johnston;1
+15;Data Transmission and Storage;4;Carlos Johnston;3
+9;Adjust fuel rods;3;Gail Lawhead;0
+12;Call Dad;1;Jamie Dang;3
+3;Window Cleaning;5;Johnson Green;1
+14;Replace ventilation ion filters;2;Karma Thames;1
+7;Computer system diagnostic;2;Kelli Weeberly;3
+13;Hull debris sweep;4;Richard Moodyl;0
+5;Replace ventilation filters;2;Robbie Mitchell;1

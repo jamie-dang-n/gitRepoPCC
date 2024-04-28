@@ -1,0 +1,7 @@
+Henry;Nguyen;3.5
+Brenda;Stern;2.0
+Lynda;Robison;3.2
+Sonya;King;3.9
+Gayathri;Iyer;3.5
+Glen;Sasek;3.7
+Priya;Goel;3.8
