@@ -1,15 +1,22 @@
 #include "group.h"
 
+// Default Constructor
 Group::Group() : name(nullptr), num(0), specialInfo('n'), wantPromo(0){
 }
 
-Group::Group(char * name, int num, char specialInfo, bool wantPromo) {
-	setName(name);
-	setNum(num);
-	setSpecialInfo(specialInfo);
-	setWantPromo(wantPromo);
+// Parameterized Constructor
+Group::Group(const char * name, int num, char specialInfo, bool wantPromo)
+				: name(nullptr), num(0), specialInfo('n'), wantPromo(0){
+	init(name, num, specialInfo, wantPromo);
 }
 
+// Copy Constructor
+Group::Group(const Group& aGroup) {
+	name = new char[strlen(aGroup.name) + 1];
+	*this = aGroup;	
+}
+
+// Destructor
 Group::~Group() {
 	// Setting non-dynamic variables to null values
 	num = 0;
@@ -22,6 +29,8 @@ Group::~Group() {
 	}
 	name = nullptr;
 }
+
+// Setters
 void Group::setName(const char * name) {
 	if (this->name) {
 		delete[] this->name;
@@ -56,4 +65,59 @@ void Group::setWantPromo(const bool wantPromo) {
 	this->wantPromo = wantPromo;
 }
 
+// Getters
+const char * Group::getName() const {
+	return name;
+}
 
+int Group::getNum() const {
+	return num;
+}
+
+char Group::getSpecialInfo() const {
+	return specialInfo;
+}
+
+bool Group::getWantPromo() const {
+	return wantPromo;
+}
+
+// Private Helper Functions
+void Group::init(const char * name, int num, char specialInfo, bool wantPromo) {
+	setName(name);
+	setNum(num);
+	setSpecialInfo(specialInfo);
+	setWantPromo(wantPromo);
+}
+
+// Assignment Operator Overload
+const Group& Group::operator= (const Group& aGroup) {
+	if (this == &aGroup) {
+		return *this;
+	}	
+	init(aGroup.name, aGroup.num, aGroup.specialInfo, aGroup.wantPromo);
+	return *this;
+}
+
+// Insertion Operator Overload
+ostream& operator<< (ostream& out, const Group& aGroup) {
+	out << "\"" << aGroup.name << "\"" << ", " << aGroup.num << " person(s), ";
+	switch (aGroup.specialInfo) {
+		case 'w':
+			out << "wheelchair";
+			break;
+		case 'h':
+			out << "high chair";
+			break;
+		case 'n':
+			out << "no special seating";
+			break;
+	}
+	out << ", ";
+	if (aGroup.wantPromo) {
+		out << "wants promo." << endl;
+	} else {
+		out << "no promo." << endl;
+	}
+	return out;
+}

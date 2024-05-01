@@ -1,12 +1,12 @@
 CC = g++
 CPPFLAGS = -std=c++17 -g -Wall
-OBJS = main.o stack.o queue.o group.o
+OBJS = main.o stack.o queue.o group.o entry.o
 
 main: $(OBJS)
 
-main.o: stack.h queue.h group.h
+main.o: main.h stack.h queue.h group.h entry.h
 
-stack.o: stack.h group.h
+stack.o: stack.h group.h entry.h
 
 queue.o: queue.h group.h
 
