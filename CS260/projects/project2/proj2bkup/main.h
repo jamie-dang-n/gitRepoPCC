@@ -1,4 +1,12 @@
+// Author: Jamie Dang
+// Date: 5/3/24
+// Program Number: Project 2
+// Purpose: Header file for main.cpp
+// Module Name: main.h (header file for main.cpp)
+
+
 #include <iostream> 
+#include <fstream>
 #include "queue.h"
 #include "stack.h"
 #include <limits> // for cin.ignore
@@ -22,3 +30,4 @@ bool validChar(char aChar, const int typeChar);
 void readGroup(Group& returnGroup);
 void addStack(Stack& returnStack); 
 void exeManager(Stack& aStack);
+bool saveToFile(Stack& aStack, const char fileName[]);

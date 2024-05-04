@@ -1,3 +1,11 @@
+// Author: Jamie Dang
+// Date: 5/3/24
+// Program Number: Project 2
+// Purpose: header file to define queue ADT in terms of 
+// a circular lnked list. The class implements the ADT
+// with a circular linked list of Group objects.
+// Module Name: queue.h (header file for queue.cpp)
+
 #ifndef QUEUE_H
 #define QUEUE_H
 
@@ -19,6 +27,7 @@ class Queue {
 		int getNum();
 
 	private:
+		// Queue data members
 		struct Node {
 			Node * next;
 			Group data;

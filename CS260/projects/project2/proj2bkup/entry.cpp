@@ -1,3 +1,9 @@
+// Author: Jamie Dang
+// Date: 5/3/24
+// Program Number: Project 2
+// Purpose: implements entry class methods
+// Module Name: entry.cpp (implementation file for entry.h)
+
 #include "entry.h"
 
 // Default Constructor
@@ -8,7 +14,7 @@ Entry::Entry() : fullName(nullptr), email(nullptr) {
 
 
 
-// Parameterized Constructor
+// Parameterized Constructor -- initializes each data member
 Entry::Entry(const char * clientName, const char * clientEmail) : fullName(nullptr), email(nullptr)  {
 	setFullName(clientName);
 	setEmail(clientEmail);
@@ -75,7 +81,7 @@ void Entry::setEmail(const char * clientEmail) {
 
 
 
-// Operator Overloads
+// Assignment operator overload
 const Entry & Entry::operator=(const Entry& anEntry) {
 	setFullName(anEntry.fullName);
 	setEmail(anEntry.email);
@@ -84,6 +90,7 @@ const Entry & Entry::operator=(const Entry& anEntry) {
 
 
 
+// Insertion operator overload
 ostream& operator<< (ostream& out, const Entry& anEntry) {
 	out << "Full Name: " <<  anEntry.fullName << endl;
 	out << "Email: " << anEntry.email << endl;

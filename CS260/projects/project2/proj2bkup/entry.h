@@ -1,3 +1,10 @@
+// Author: Jamie Dang
+// Date: 5/3/24
+// Program Number: Project 2
+// Purpose: Header file for entry class to hold data for stack ADT
+// Module Name: entry.h (header file for entry.cpp)
+
+
 #ifndef ENTRY_H
 #define ENTRY_H
 

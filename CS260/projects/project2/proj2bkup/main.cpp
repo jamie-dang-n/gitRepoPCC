@@ -1,3 +1,11 @@
+// Author: Jamie Dang
+// Date: 5/3/24
+// Program Number: Project 2
+// Purpose: This is the client code to run all 
+// the Stack and Queue ADTs as an application to
+// keep track of restaurant data.
+// Module Name: main.cpp (client code)
+
 #include "main.h"
 
 int main() {
@@ -5,7 +13,7 @@ int main() {
 	int option = 0;
 	Queue queue;
 	Stack stack(2);
-	
+
 	// Welcome message
 	welcome();
 
@@ -19,9 +27,14 @@ int main() {
 	return 0;
 }
 
+
+
+
 // Function Definitions //
 
 
+
+// Menu Display Functions
 
 // Welcome Message
 void welcome() {
@@ -53,10 +66,16 @@ void managerMenu() {
 }
 
 
+// Operations
 
-// Execute the main menu; access the manager's menu
+// Name: exeMenu
+// Purpose: Execute the main menu; access the manager's menu
+// Input: const int option, Queue& aQueue, Stack& aStack
+// Output: error messages, prompts, confirmations
+// Return: none
 void exeMenu(const int option, Queue& aQueue, Stack& aStack) {
 	Group aGroup;
+	cout << endl; // blank line
 	switch(option) {
 		case 1:
 			readGroup(aGroup);
@@ -94,17 +113,21 @@ void exeMenu(const int option, Queue& aQueue, Stack& aStack) {
 			break;
 		case 6:
 			cout << "Thank you for using the \"Restaurant Queue and Promo Stack Manager\"!" << endl;
-			cout << "\"promos.txt\" has been updated." << endl;
 			break;
 		default:
 			cout << "Error: Invalid value. Please try again." << endl;
 			break;
 	}	
+	cout << endl; // blank line
 }
 
 
 
-// Read in and validate an integer
+// Name: getInt
+// Purpose: Read in and validate an integer
+// Input: none
+// Output: error message, reprompt
+// Return: int num
 int getInt() {
 	int num;
 	cout << ">> ";
@@ -121,8 +144,14 @@ int getInt() {
 }
 
 
-
-// Read in and validate a character
+// Name: getChar
+// Purpose: Read in and validate a character
+// Input: const int typeChar -- allows the function
+// 		  to be reused for multiple sets of valid chars.
+// 		  typeChar acts as an ID number for what set to 
+// 		  validate by, which is defined furhter in validChar().
+// Output: error message, remprompt
+// Return: char aChar
 char getChar(const int typeChar) {
 	char aChar;
 	cout << ">> ";
@@ -141,7 +170,13 @@ char getChar(const int typeChar) {
 
 
 
-// Helper function to validate a character
+// Name: validChar
+// Purpose: Helper function to validate a character
+// 			based on the integer typeChar, which
+// 			denotes what set of valid chars to test by.
+// Input: char aChar, const int typeChar
+// Output: none
+// Return: bool valid
 bool validChar(char aChar, const int typeChar) {
 	bool valid = false;
 	switch (typeChar) {
@@ -163,7 +198,11 @@ bool validChar(char aChar, const int typeChar) {
 
 
 
-// Read in data for a group
+// Name: readGroup
+// Purpose: Read in data for a group and return by reference
+// Input: Group& returnGroup
+// Output: Prompts
+// Return: none
 void readGroup(Group& returnGroup) {
 	char name[MAXCHAR];
 	int num = 0;
@@ -205,7 +244,11 @@ void readGroup(Group& returnGroup) {
 
 
 
-// Read in data, then push it to the stack
+// Name: addStack
+// Purpose: Read in data, then push it to the stack
+// Input: Stack& returnStack (lets us modify the original stack)
+// Output: Prompts for an entry
+// Return: none
 void addStack(Stack& returnStack) {
 	char fullName[MAXCHAR];
 	char email[MAXCHAR];
@@ -223,15 +266,22 @@ void addStack(Stack& returnStack) {
 
 
 
-// Execute manager's menu (for the stack)
+// Name: exeManager
+// Purpose: Execute manager's menu (for the stack)
+// Input: Stack& aStack
+// Output: Confirmation of operations
+// Return: none
 void exeManager(Stack& aStack) {
 	managerMenu();
 	Entry anEntry;
 	char option = getChar(MANAGER_MENU);
+	cout << endl; // blank line
 	switch(option) {
 		case 'a':
-			if(aStack.pop()) {
-				cout << "Entry successfully removed." << endl;
+			if(!aStack.isEmpty()) {
+				saveToFile(aStack, "promos.txt");
+				if (aStack.pop())
+					cout << "Entry successfully removed." << endl;
 			} else {
 				cout << "Pop not successful." << endl;
 			}
@@ -250,4 +300,28 @@ void exeManager(Stack& aStack) {
 			cout << "Error: Invalid value. Please try again." << endl; 
 			break;
 	}
+}
+
+
+
+// Name: saveToFile
+// Purpose: Saves stack data to fileName.txt before popping
+// Input: Stack& aStack, const char fileName[]
+// Output: confirmation of operations
+// Return: bool success
+bool saveToFile(Stack& aStack, const char fileName[]) {
+	bool success = false;
+	Entry anEntry;
+	ofstream out;
+	out.open(fileName, ios_base::app);
+	if (!out) {
+		cout << "Unable to open output file. Stack data not saved." << endl;
+	} else {
+		aStack.peek(anEntry);
+		out << anEntry << endl;
+		cout << "Stack data successfully saved to " << fileName << "." << endl;
+		success = true;
+	}
+	out.close();
+	return success;
 }
