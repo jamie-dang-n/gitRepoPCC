@@ -1,34 +1,20 @@
-// Author: Jamie Dang 
-// Date: 5/3/24
-// Program Number: Project 2
-// Purpose: Implements group class methods
-// Module Name: group.cpp (implementation file for group.h)
-
 #include "group.h"
-
-
 
 // Default Constructor
 Group::Group() : name(nullptr), num(0), specialInfo('n'), wantPromo(0){
 }
 
-
-
-// Parameterized Constructor -- iniitalizes each data member
+// Parameterized Constructor
 Group::Group(const char * name, int num, char specialInfo, bool wantPromo)
 				: name(nullptr), num(0), specialInfo('n'), wantPromo(0){
 	init(name, num, specialInfo, wantPromo);
 }
-
-
 
 // Copy Constructor
 Group::Group(const Group& aGroup) {
 	name = new char[strlen(aGroup.name) + 1];
 	*this = aGroup;	
 }
-
-
 
 // Destructor
 Group::~Group() {
@@ -43,8 +29,6 @@ Group::~Group() {
 	}
 	name = nullptr;
 }
-
-
 
 // Setters
 void Group::setName(const char * name) {
@@ -81,8 +65,6 @@ void Group::setWantPromo(const bool wantPromo) {
 	this->wantPromo = wantPromo;
 }
 
-
-
 // Getters
 const char * Group::getName() const {
 	return name;
@@ -100,23 +82,13 @@ bool Group::getWantPromo() const {
 	return wantPromo;
 }
 
-
-
-// Private Methods
-
-// Name: init
-// Purpose: initializes each data member by calling all setters
-// Input: const char * name, int num, char specialInfo, bool wantPromo
-// Output: none
-// Return: none
+// Private Helper Functions
 void Group::init(const char * name, int num, char specialInfo, bool wantPromo) {
 	setName(name);
 	setNum(num);
 	setSpecialInfo(specialInfo);
 	setWantPromo(wantPromo);
 }
-
-
 
 // Assignment Operator Overload
 const Group& Group::operator= (const Group& aGroup) {
@@ -126,8 +98,6 @@ const Group& Group::operator= (const Group& aGroup) {
 	init(aGroup.name, aGroup.num, aGroup.specialInfo, aGroup.wantPromo);
 	return *this;
 }
-
-
 
 // Insertion Operator Overload
 ostream& operator<< (ostream& out, const Group& aGroup) {

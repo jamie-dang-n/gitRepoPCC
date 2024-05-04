@@ -1,11 +1,3 @@
-// Author: Jamie Dang
-// Date: 5/3/24
-// Program Number: Project 2
-// Purpose: Implementation file for stack class,
-// using dynamically allocated arrays and Entry
-// objects as the elements in the array.
-// Module Name: stack.cpp (implementation file for stack.h)
-
 #include "stack.h"
 
 // Default Constructor
@@ -14,7 +6,7 @@ Stack::Stack() : top(-1), stack(nullptr) {
 
 
 
-// Parameterized Constructor - initializes size
+// Parameterized Constructor
 Stack::Stack(int initSize) {
 	currCapacity = initSize;
 	stack = new Entry[currCapacity];
@@ -39,22 +31,14 @@ Stack::~Stack() {
 
 
 
-// Name: isEmpty
-// Purpose: Checks if stack is empty
-// Input: none
-// Output: none
-// Return: none
+// Checks if stack is empty
 bool Stack::isEmpty() const {
 	return top < 0;
 }
 
 
 
-// Name: pop
-// Purpose: removes an entry from the top of the stack
-// Input: none
-// Output: none
-// Return: bool success
+//  Pop function removes an entry from the top of the stack
 bool Stack::pop() {
 	bool success = false;
 	if (!isEmpty()) {
@@ -66,11 +50,7 @@ bool Stack::pop() {
 
 
 
-// Name: push
-// Purpose: adds an entry to the top of the stack
-// Input: const char * clientName and clientEmail
-// Output: none
-// Return: none
+// Push function adds an entry to the top of the stack
 void Stack::push(const char * clientName, const char * clientEmail) {
 	Entry newEntry(clientName, clientEmail);
 	if (top == (currCapacity - 1)) { // expand array if full
@@ -84,12 +64,7 @@ void Stack::push(const char * clientName, const char * clientEmail) {
 
 
 
-// Name: peek 
-// Purpose: returns the top entry of the stack
-// Input: Entry& returnEntry-- used to return 
-// 		  the entry at the top of the stack
-// Output: none
-// Return: bool success
+// Peek function returns the top entry of the stack
 bool Stack::peek(Entry& returnEntry) const {
 	bool success = false;
 	if (!(isEmpty())) {
@@ -101,11 +76,7 @@ bool Stack::peek(Entry& returnEntry) const {
 
 
 
-// Name: display 
-// Purpose: displays the entire stack.
-// Input: none
-// Output: the entire stack
-// Return: none
+// Display function displays the entire stack.
 void Stack::display() {
 	if (!isEmpty()) {
 		cout << "There are " << top + 1 << " entries." << endl;
@@ -120,18 +91,10 @@ void Stack::display() {
 
 
 
-// Private Methods //
-
-
-// Name: expand
-// Purpose: expand should be called ONLY 
-// 			when the array is full and must 
-// 			be grown. Expand function will 
-// 			grow the stack by allocating a 
-// 			new, larger dynamic array of entries.
-// Input: none
-// Output: none
-// Return: none
+// Private Method // 
+// Expand should be called ONLY when the array is full and must be grown
+// Expand function will grow the stack by allocating a new, larger dynamic array
+// of entries.
 void Stack::expand() {
 	// note: top holds the index of the position AFTER the last item in the array
 	currCapacity *= GROWTH_FACTOR;
