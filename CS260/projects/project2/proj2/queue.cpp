@@ -1,9 +1,19 @@
+// Author: Jamie Dang
+// Date: 5/3/24
+// Program Number: Project 2
+// Purpose: Implementation file for queue methods,
+// using a circular linked list and Nodes holding
+// Group objects as data. rear->next holds the front of 
+// the queue, whereas rear holds the back of the queue.
+// Module Name: queue.cpp (implementation file for queue.h)
+
 #include "queue.h"
 
-// Constructor and Destructor
+// Default Constructor
 Queue::Queue() : rear(nullptr), numGroups(0) {
 }
 
+// Destructor
 Queue::~Queue() {
 	Node * front = nullptr;
 	Node * curr = nullptr;
@@ -26,15 +36,21 @@ Queue::~Queue() {
 // Public Methods // 
 
 
-
-// Check if queue is empty
+// Name: isEmpty
+// Purpose: Check if queue is empty
+// Input: none
+// Output: none
+// Return: boolean value from rear == nullptr
 bool Queue::isEmpty() {
 	return (rear == nullptr); // if rear == nullptr, the queue is empty
 }
 
 
-
-// Returns number of groups in queue
+// Name: getNum
+// Purpose: Returns number of groups in the queue
+// Input: none
+// Output: none
+// return: int numGroups
 int Queue::getNum() {
 	return numGroups;
 }
@@ -42,8 +58,12 @@ int Queue::getNum() {
 
 
 
-// Enqueue function adds a group to the end of the circular
-// linked list (the queue)
+// Name: enqueue 
+// Purpose: adds a group to the end of the circular
+// 			linked list (the queue).
+// Input: const Group& aGroup -> group to insert
+// Output: none
+// Return: bool success
 bool Queue::enqueue(const Group& aGroup) {
 	bool success = false;
 	// Create the new node
@@ -72,7 +92,11 @@ bool Queue::enqueue(const Group& aGroup) {
 
 
 
-// Dequeue function removes the entry at the front of the queue
+// Name: dequeue 
+// Purpose: removes the entry at the front of the queue
+// Input: none
+// Output: none
+// Return: bool success
 bool Queue::dequeue() {
 	bool success = false;
 	Node * front = nullptr;
@@ -101,7 +125,11 @@ bool Queue::dequeue() {
 
 
 
-// Peek function returns the entry at the front of the queue
+// Name: peek 
+// Purpose: returns the entry at the front of the queue
+// Input: none
+// Output: none
+// Return: bool success
 bool Queue::peek(Group& returnGroup) {
 	bool success = false;
 	if (!isEmpty()) {
@@ -113,7 +141,11 @@ bool Queue::peek(Group& returnGroup) {
 
 
 
-// Display function displays the entire queue
+// Name: display 
+// Purpose: displays the entire queue
+// Input: none
+// Output: the entire queue and the number of people in line
+// Return: none
 void Queue::display() {
 	Node * curr = nullptr;
 	int i = 0;

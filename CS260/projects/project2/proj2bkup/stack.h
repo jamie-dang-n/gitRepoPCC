@@ -1,7 +1,17 @@
+// Author: Jamie Dang
+// Date: 5/3/24
+// Program Number: Project 2
+// Purpose: Header file for implementing the Stack ADT
+// as a class with a dynamically allocated array. The 
+// array contains Entry objects.
+// Module Name: stack.h (header file for stack.cpp)
+
 #ifndef STACK_H
 #define STACK_H
 
 #include "entry.h"
+
+using namespace std;
 
 class Stack {
 	public:
@@ -17,6 +27,7 @@ class Stack {
 		bool peek(Entry& returnEntry) const;
 		void display();
 	private:
+		// Stack data members
 		const static int GROWTH_FACTOR = 2;
 		int top; // if top == currCapacity - 1, the stack is full
 		int currCapacity;
