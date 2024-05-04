@@ -67,22 +67,29 @@ NOTE: The program will re-prompt if necessary, based on invalid data
 (such as a negative number for the group number, non-matching data types, 
 etc.)
 
-Part 0: The Group ADT
+Part 1: The Group ADT
 The Group ADT will represent groups of people who are in line.
-A single Group ADT should hold the following data:
+A single Group object should hold the following data:
 - Name of the Group (char array)
 - Number of people in the Group (integer)
 - If anybody needs special seating (if so, include the information about
   the requirements) [char]
-- If the group would like to receive coupons/other promotional materials
-  (if so, include the contact name (full) and email address) [boolean and char array]
+- If the group would like to receive coupons/other promotional materials [bool]
 This ADT should have a default constructor, parameterized constructor with all parameters,
-and a destructor. Group ADT objects will be used in the Queue ADT. 
+copy constructor, and a destructor. Group ADT objects will be used in the Queue ADT. 
 
 NOTE: for the 4th bullet point, the group ADT will ONLY include the boolean. The stack will 
 have two char arrays to hold the name and email address.
 
-Part 1: The Queue ADT
+Part 2: The Entry ADT
+The Entry ADT will represent entries of data for the Stack ADT.
+A single Entry object should hold the following data:
+- full name of person who wants a promo [char *]
+- email of the person who wants a promo [char *]
+This ADT should have a default constructor, parameterized constructor with all paramters, 
+copy constructor, and a destructor. 
+
+Part 3: The Queue ADT
 The Queue ADT will represent the people in line waiting for a table.
 The queue is ordered based on the order in which the groups arrive
 
@@ -102,8 +109,7 @@ in line should be removed from the top of the line.
 3. Peek: Examine the data of the next group of people in line (top of the line)
 4. Display: Show the number of people in line
 
-
-Part 2: The Stack ADT
+Part 4: The Stack ADT
 The Stack represents people interested in receiving promotional material.
 The Stack should include people's full name and email address.
 The Stack will be implemented using an array, where each element in the array 
@@ -134,7 +140,7 @@ Stack ADT Entry object and add it to the stack.
 The pop function will remove groups at the top (most recent) of the stack. 
 However, that data won't totally be lost. It will be saved in an external text file.  
 
-Part 3: The Driver (Test Program)
+Part 5: The Driver (Test Program)
 The driver will present the test run (as written above) in a looping menu format. 
 The client will be able to test out each major function of the queue ADT. I will not put
 in the functionality for a "password" by the manager, but the menu options also allows for 

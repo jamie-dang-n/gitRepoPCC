@@ -1,6 +1,6 @@
 // Author: Jamie Dang
 // Date: 5/3/24
-// Program Number: Project 2
+// Program Number: CS260 Project 2
 // Purpose: header file to define queue ADT in terms of 
 // a circular lnked list. The class implements the ADT
 // with a circular linked list of Group objects.

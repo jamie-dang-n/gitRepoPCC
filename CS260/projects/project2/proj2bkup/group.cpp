@@ -1,12 +1,10 @@
 // Author: Jamie Dang 
 // Date: 5/3/24
-// Program Number: Project 2
+// Program Number: CS260 Project 2
 // Purpose: Implements group class methods
 // Module Name: group.cpp (implementation file for group.h)
 
 #include "group.h"
-
-
 
 // Default Constructor
 Group::Group() : name(nullptr), num(0), specialInfo('n'), wantPromo(0){

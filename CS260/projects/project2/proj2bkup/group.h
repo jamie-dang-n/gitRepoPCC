@@ -1,6 +1,6 @@
 // Author: Jamie Dang
 // Date: 5/3/24
-// Program Number: Project 2
+// Program Number: CS260 Project 2
 // Purpose: Header file for group class to hold data for Queue nodes
 // Module Name: group.h (header file for group.cpp)
 

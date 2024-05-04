@@ -1,6 +1,6 @@
 // Author: Jamie Dang
 // Date: 5/3/24
-// Program Number: Project 2
+// Program Number: CS260 Project 2
 // Purpose: Implementation file for stack class,
 // using dynamically allocated arrays and Entry
 // objects as the elements in the array.

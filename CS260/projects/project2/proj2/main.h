@@ -1,9 +1,8 @@
 // Author: Jamie Dang
 // Date: 5/3/24
-// Program Number: Project 2
+// Program Number: CS260 Project 2
 // Purpose: Header file for main.cpp
 // Module Name: main.h (header file for main.cpp)
-
 
 #include <iostream> 
 #include <fstream>

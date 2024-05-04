@@ -1,6 +1,6 @@
 // Author: Jamie Dang
 // Date: 5/3/24
-// Program Number: Project 2
+// Program Number: CS260 Project 2
 // Purpose: implements entry class methods
 // Module Name: entry.cpp (implementation file for entry.h)
 

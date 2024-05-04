@@ -1,6 +1,6 @@
 // Author: Jamie Dang
 // Date: 5/3/24
-// Program Number: Project 2
+// Program Number: CS260 Project 2
 // Purpose: Implementation file for queue methods,
 // using a circular linked list and Nodes holding
 // Group objects as data. rear->next holds the front of 

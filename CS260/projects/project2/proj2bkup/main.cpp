@@ -1,6 +1,6 @@
 // Author: Jamie Dang
 // Date: 5/3/24
-// Program Number: Project 2
+// Program Number: CS260 Project 2
 // Purpose: This is the client code to run all 
 // the Stack and Queue ADTs as an application to
 // keep track of restaurant data.
