@@ -10,7 +10,9 @@
 #define QUEUE_H
 
 #include "group.h"
-
+#include <fstream>
+#include <limits>
+#include <cstring>
 
 class Queue {
 	public:
@@ -25,8 +27,11 @@ class Queue {
 		void display();
 		bool isEmpty();
 		int getNum();
-
+		void loadFromFile(const char * fileName);
 	private:
+		// Constants
+		const static int MAX_CHAR = 101;
+
 		// Queue data members
 		struct Node {
 			Node * next;

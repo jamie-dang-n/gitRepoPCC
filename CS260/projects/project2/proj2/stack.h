@@ -10,6 +10,8 @@
 #define STACK_H
 
 #include "entry.h"
+#include <fstream>
+#include <limits>
 
 using namespace std;
 
@@ -26,9 +28,13 @@ class Stack {
 		void push(const char * clientName, const char * clientEmail);
 		bool peek(Entry& returnEntry) const;
 		void display();
+		void loadFromFile(const char * fileName);
 	private:
-		// Stack data members
+		// Constants
 		const static int GROWTH_FACTOR = 2;
+		const static int MAX_CHAR = 101;
+		
+		// Stack data members
 		int top; // if top == currCapacity - 1, the stack is full
 		int currCapacity;
 		Entry * stack;

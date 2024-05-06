@@ -108,6 +108,7 @@ should be added to the end of the line.
 in line should be removed from the top of the line.
 3. Peek: Examine the data of the next group of people in line (top of the line)
 4. Display: Show the number of people in line
+5. loadToFile: to be used to load data into the file at the start of the program in main.
 
 Part 4: The Stack ADT
 The Stack represents people interested in receiving promotional material.
@@ -130,6 +131,7 @@ Stack ADT functions are as follows:
 2. Pop: remove 1 entry from the top of the array
 3. Peek: display the data of the entry at the top of the array
 4. Display: print out the entire stack
+5. loadToFile: to be used to load data into the file at the start of the program in main.
 
 When a group gets seated at the table, you push their info into the stack if 
 they're interested in promo materials. This will be based on the 4th bullet point in

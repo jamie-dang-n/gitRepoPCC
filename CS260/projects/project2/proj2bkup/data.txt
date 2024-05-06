@@ -1,0 +1,8 @@
+group name;number in group;special needs;want promo
+Jamie;6;h;n
+Allison;20;w;y
+Marco;3;n;n
+Jason;6;h;y
+Arthur;2;w;n
+Janice;22;n;y
+Albert;3;n;y

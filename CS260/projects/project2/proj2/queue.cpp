@@ -35,6 +35,64 @@ Queue::~Queue() {
 
 // Public Methods // 
 
+// Name: loadFromFile
+// Purpose: load data from fileName.txt
+// Input: const char * fileName
+// Output: none
+// Return: none
+void Queue::loadFromFile(const char * fileName) {
+	ifstream inFile; // input from file
+	Group aGroup; // aGroup to hold data members
+
+	// Data members to read into
+	char name[MAX_CHAR];
+	int num = 0;
+	char specialNeeds;
+	char wantPromo;
+	bool boolPromo = false;
+
+	// open data file to read from
+	inFile.open(fileName);
+	if (!inFile) {
+		cerr << "Error: could not open the input file. Program terminating." << endl;
+		exit(1);
+	}
+
+	// ignore header row
+	inFile.ignore(numeric_limits<streamsize>::max(), '\n');
+
+	// Read in from file
+	inFile.getline(name, MAX_CHAR, ';');
+	while (!inFile.eof()){
+		inFile >> num;
+		inFile.ignore(5, ';');
+		inFile >> specialNeeds;
+		inFile.ignore(5, ';');
+		inFile >> wantPromo;
+		inFile.ignore(5, '\n');
+
+		// set up aGroup;
+		wantPromo = tolower(wantPromo);
+		if (wantPromo == 'y') {
+			boolPromo = true;
+		} else {
+			boolPromo = false;
+		}
+		cout << "DEBUG: checking wantPromo -> " << wantPromo << endl;
+		aGroup.setName(name);
+		aGroup.setNum(num);
+		aGroup.setSpecialInfo(specialNeeds);
+		aGroup.setWantPromo(boolPromo);
+
+		// add aGroup to the queue
+		enqueue(aGroup);
+
+		// continue reading loop
+		inFile.getline(name, MAX_CHAR, ';');
+	}
+
+	inFile.close();
+}
 
 // Name: isEmpty
 // Purpose: Check if queue is empty

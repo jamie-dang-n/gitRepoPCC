@@ -37,7 +37,42 @@ Stack::~Stack() {
 
 // Public Operations // 
 
+// Name: loadFromFile
+// Purpose: load data into stack from fileName.txt
+// Input: const char * fileName
+// Output: none
+// Return: none
+void Stack::loadFromFile(const char * fileName){ 
+	ifstream inFile; // insert from file
 
+	// Data members to fill from inFile
+	char name[MAX_CHAR];
+	char email[MAX_CHAR];
+
+	// Open data file to read in
+	inFile.open(fileName);
+	if (!inFile) {
+		cerr<< "Error: Could not open the input file. Program terminating." << endl;
+		exit(1);
+	}
+
+	// Ignore header row
+	inFile.ignore(numeric_limits<streamsize>::max(), '\n');
+	
+	// Input loop from file
+	inFile.getline(name, MAX_CHAR, ';');
+	while(!inFile.eof()) {
+		inFile.getline(email, MAX_CHAR, '\n');
+		
+		// add song
+		push(name, email);
+
+		// continue reading loop
+		inFile.getline(name, MAX_CHAR, ';');
+	}
+
+	inFile.close();
+}
 
 // Name: isEmpty
 // Purpose: Checks if stack is empty
@@ -107,11 +142,13 @@ bool Stack::peek(Entry& returnEntry) const {
 // Output: the entire stack
 // Return: none
 void Stack::display() {
+	int j = 0;
 	if (!isEmpty()) {
 		cout << "There are " << top + 1 << " entries." << endl;
-		for (int i = 0; i < top + 1; i++) {
-			cout << i + 1 << ". ";
+		for (int i = top; i >= 0; i--) {
+			cout << j + 1 << ". ";
 			cout << stack[i].getFullName() << "; " << stack[i].getEmail() << endl;
+			j++;
 		}	
 	} else {
 		cout << "No entries to display." << endl;

@@ -92,8 +92,7 @@ const Entry & Entry::operator=(const Entry& anEntry) {
 
 // Insertion operator overload
 ostream& operator<< (ostream& out, const Entry& anEntry) {
-	out << "Full Name: " <<  anEntry.fullName << endl;
-	out << "Email: " << anEntry.email << endl;
+	out << anEntry.fullName << ";" << anEntry.email << endl;
 	return out;
 }
 

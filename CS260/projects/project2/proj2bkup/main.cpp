@@ -14,6 +14,11 @@ int main() {
 	Queue queue;
 	Stack stack(2);
 
+	// Pre-load data to stack and queue
+	stack.loadFromFile("initpromos.txt");
+	queue.loadFromFile("data.txt");
+
+
 	// Welcome message
 	welcome();
 
@@ -62,7 +67,7 @@ void managerMenu() {
 	cout << "Select an option:" << endl;
 	cout << "(A) Remove Recent Entry" << endl;
 	cout << "(B) Display All Entries" << endl;
-	cout << "(C) Display Next Entry" << endl;
+	cout << "(C) Display Recent Entry" << endl;
 }
 
 
@@ -318,7 +323,7 @@ bool saveToFile(Stack& aStack, const char fileName[]) {
 		cout << "Unable to open output file. Stack data not saved." << endl;
 	} else {
 		aStack.peek(anEntry);
-		out << anEntry << endl;
+		out << anEntry;
 		cout << "Stack data successfully saved to " << fileName << "." << endl;
 		success = true;
 	}

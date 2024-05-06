@@ -1,0 +1,5 @@
+full name;email
+Allison Jenkins;allison.jenkins@gmail.com
+Jason Adams;jasonadams21@yahoo.com
+Janice Eliott;janny22@gmail.com
+Albert Albertson;albert55@yahoo.com
