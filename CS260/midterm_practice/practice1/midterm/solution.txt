@@ -1,0 +1,175 @@
+int count(node * head) {
+	if (head) {
+		return count(head->next) + 1;
+	} 
+	return 0;
+}
+
+
+
+void insert(node * & head, int newInt, int position) {
+	// use recursion to find the position
+	if (position != 0 && head->next) {
+		insert(head->next, newInt, position - 1);
+	} else {
+		// create new node
+		node * newNum;
+		newNum = new node;
+		newNum->data = newInt;
+		newNum->previous = nullptr;
+		newNum->next = nullptr;
+		node * temp = head; // re-point using only temp instead of head
+							// to preserve head pointing at the start of the list
+		// insert
+		if (temp->previous == nullptr) {
+			// insert at top
+			temp->previous = newNum;
+			newNum->next = temp;
+			head = newNum;
+		} else if (temp->next == nullptr) {
+			// insert at end
+			newNum->previous = temp;
+			temp->next = newNum;
+		} else {
+			// insert in middle
+			newNum->previous = temp->previous;
+			newNum->next = temp;
+			temp->previous->next = newNum;
+			temp->previous = newNum;
+		}
+	}
+}
+
+
+
+int remove(node * & head, int position) {
+	int delNum = 0;
+	// use recursion to find the position
+	if (position != 0 && head->next) {
+		delNum = remove(head->next, position - 1);
+	} else { 
+		node * delNode;
+		delNode = head;// use delNode to repoint & delete instead of head	
+		// to preserve head pointing at the start of the list
+		delNum = head->data;
+		// remove
+		if (delNode->previous == nullptr) {
+			// remove first node
+			head = head->next;
+			head->previous = nullptr;
+		} else if (delNode->next == nullptr) {
+			// remove last node
+			(delNode->previous)->next = nullptr;
+		} else {
+			// remove node in middle
+			delNode->previous->next = delNode->next;
+			delNode->next->previous = delNode->previous;
+		}
+		delNode->next = nullptr;
+		delNode->previous = nullptr;
+		delete delNode;
+		delNode = nullptr;
+	}
+	return delNum;
+}
+
+
+
+// Inserting at 3, removing at 4 //
+Here is the original list: 2 -> 2 -> 2 -> 52 -> 2
+
+This list contains 5 number of items 
+
+Jamie's Code Solutions
+[int count()] The number of items in this list is: 5
+[void insert()] Calling insert(): 
+Enter number for insertion position: 3 
+[void insert()] List after insert(): 
+
+
+The resulting list is... 2 -> 2 -> 2 -> 2024 -> 52 -> 2
+
+
+Now backwards: 2 -> 52 -> 2024 -> 2 -> 2 -> 2
+
+This list contains 6 number of items 
+The sum of all data is: 2084
+[int remove()] Calling remove(): 
+Enter number for removal positon: 4
+Number removed: 52
+[int remove()] List after remove(): 
+
+
+The resulting list is... 2 -> 2 -> 2 -> 2024 -> 2
+
+
+Now backwards: 2 -> 2024 -> 2 -> 2 -> 2
+
+This list contains 5 number of items 
+The sum of all data is: 2032
+
+
+
+// Inserting at 0, removing at 0 //
+Here is the original list: 2 -> 24 -> 2 -> 68 -> 2 -> 11 -> 59 -> 6 -> 41 -> 2
+
+This list contains 10 number of items 
+
+Jamie's Code Solutions
+[int count()] The number of items in this list is: 10
+[void insert()] Calling insert(): 
+Enter number for insertion position: 0
+[void insert()] List after insert(): 
+
+The resulting list is... 2024 -> 2 -> 24 -> 2 -> 68 -> 2 -> 11 -> 59 -> 6 -> 41 -> 2
+
+
+Now backwards: 2 -> 41 -> 6 -> 59 -> 11 -> 2 -> 68 -> 2 -> 24 -> 2 -> 2024
+
+This list contains 11 number of items 
+The sum of all data is: 2241
+[int remove()] Calling remove(): 
+Enter number for removal positon: 0
+Number removed: 2024
+[int remove()] List after remove(): 
+
+
+The resulting list is... 2 -> 24 -> 2 -> 68 -> 2 -> 11 -> 59 -> 6 -> 41 -> 2
+
+
+Now backwards: 2 -> 41 -> 6 -> 59 -> 11 -> 2 -> 68 -> 2 -> 24 -> 2
+
+This list contains 10 number of items 
+The sum of all data is: 217
+
+
+
+// Inserting at count(head), removing at count(head)//
+Here is the original list: 2 -> 75 -> 2 -> 2 -> 68 -> 4 -> 62 -> 2
+
+This list contains 8 number of items 
+
+Jamie's Code Solutions
+[int count()] The number of items in this list is: 8
+[void insert()] Calling insert(count(head)): 
+[void insert()] List after insert(): 
+
+The resulting list is... 2 -> 75 -> 2 -> 2 -> 68 -> 4 -> 62 -> 2 -> 2024
+
+
+Now backwards: 2024 -> 2 -> 62 -> 4 -> 68 -> 2 -> 2 -> 75 -> 2
+
+This list contains 9 number of items 
+The sum of all data is: 2241
+[int remove()] Calling remove(count(head)): 
+Number removed: 2024
+[int remove()] List after remove(): 
+
+
+The resulting list is... 2 -> 75 -> 2 -> 2 -> 68 -> 4 -> 62 -> 2
+
+
+Now backwards: 2 -> 62 -> 4 -> 68 -> 2 -> 2 -> 75 -> 2
+
+This list contains 8 number of items 
+The sum of all data is: 217
