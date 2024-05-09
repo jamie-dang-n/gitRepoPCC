@@ -1,0 +1,7 @@
+Topic; Website; Summary; Review; Rating
+Anthropology; anthropology.com; a website about anthropology; very informative and interesting; 5
+Media; youtube.com; a place to share and host your own videos; a little boring; 3
+Media; instagram.com; a place to share your favorite photos; poor user design; 1
+Media; reddit.com; a forum to ask questions; confusing to use; 2
+History; historicalawesome.com; an online history textbook; fun and interactive; 4
+Computer Science; cplusplustutor.com; a code visualizer; incredibly useful for debugging; 5

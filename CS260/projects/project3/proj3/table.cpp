@@ -39,7 +39,6 @@ void Table::loadFromFile(const char * fileName) {
 	char address[MAXCHAR];
 	char summary[MAXCHAR];
 	char review[MAXCHAR];
-	int index = -1;
 	int rating = -1;
 
 	// open file

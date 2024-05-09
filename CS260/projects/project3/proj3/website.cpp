@@ -1,14 +1,14 @@
 #include "website.h"
 
-Website::Website() : index(-1), topic(nullptr), address(nullptr), summary(nullptr),
+Website::Website() : topic(nullptr), address(nullptr), summary(nullptr),
 					 review(nullptr), rating(-1) {
 }
 
-Website::Website(int index, const char * topic, const char * address, 
+Website::Website(const char * topic, const char * address, 
 				const char * summary, const char * review, const int rating)
-				: index(-1), topic(nullptr), address(nullptr), summary(nullptr),
+				: topic(nullptr), address(nullptr), summary(nullptr),
 			      review(nullptr), rating(-1)  {
-	init(index, topic, address, summary, review, rating);
+	init(topic, address, summary, review, rating);
 }
 
 Website::Website(const Website& aSite) {
@@ -16,7 +16,6 @@ Website::Website(const Website& aSite) {
 
 Website::~Website() {
 	// setting non-dynamic variables to null values
-	index = -1;
 	rating = -1;
 
 	// Deleting dynamic memory
@@ -43,10 +42,6 @@ Website::~Website() {
 }
 
 // Getters
-int Website::getIndex() const {
-	return index;
-}
-
 const char * Website::getTopic() const {
 	return topic;
 }
@@ -68,10 +63,6 @@ int Website::getRating() const {
 }	
 
 // Setters
-void Website::setIndex(const int index) {
-	this->index = index;
-}
-
 void Website::setTopic(const char * topic) {
 	if (this->topic) {
 		delete[] this->topic;
@@ -113,9 +104,8 @@ void Website::setRating(const int rating) {
 }
 
 // Private helper
-void Website::init(int index, const char * topic, const char * address, 
+void Website::init(const char * topic, const char * address, 
 				   const char * summary, const char * review, const int rating) {
-	setIndex(index);
 	setTopic(topic);
 	setAddress(address);
 	setSummary(summary);
@@ -128,7 +118,7 @@ const Website& Website::operator= (const Website& aSite) {
 	if (this == &aSite) {
 		return *this;
 	}
-	init(aSite.index, aSite.topic, aSite.address, aSite.summary, aSite.review, aSite.rating);
+	init(aSite.topic, aSite.address, aSite.summary, aSite.review, aSite.rating);
 	return *this;	
 }
 
