@@ -1,0 +1,8 @@
+apple:0.99
+banana:0.69
+cookie:0.50
+donut:1.00
+egg:3.88
+fish:5.88
+milk:2.99
+yogurt:6.38

@@ -1,0 +1,76 @@
+Design Document: Project 3
+Author: Jamie Dang
+Date: 5/7/2024
+
+Purpose: this program will use a hash table to store websites by topic.
+
+Part 1: Website Class
+The Website Class will be what I use to make Website objects for the Table ADT.
+Each website contains the following:
+1. Topic Name [char *]
+2. Website address [char *]
+3. Summary of website [char *]
+4. Website Review [char *]
+5. Rating [int, 1 through 5]
+
+Part 2: Table ADT
+This Table ADT will store Website objects. This ADT will be in the form of a hash
+table, with a (dynamic) array of pointers to linked lists. The linked lists will be
+their own class.
+
+Table functions:
+1. Constructor
+2. Destructor (deallocates the hash table)
+3. Insert a new website by topic (add website's information into the hash table)
+4. Retrieve all websites based on topic keyword supplied-- will return a boolean
+	to indicate success or failure. This function will not correspond with the user
+	at all.
+5. Edit -> modify the review and rating for a particular topic and website
+6. Remove all websites with a 1 star rating
+7. Display based on given topic keyword
+8. Display all websites
+9. Monitor, for the performance of the hashing function by displaying each 
+	chain's length
+10. The hashing function to evenly distribute the websites into the hash table.
+
+Part 3: Driver/Test Program
+The driver will first populate the hash table with data from data.txt.
+Then, it will enter a menu that looks like the following:
+(Note that when incorrect data is entered, the program will accordingly
+reprompt until the correct data is entered.)
+
+Website Topic Tracker
+
+Please choose an option:
+
+(1) Add a new website by topic
+(2) Retrieve based on topic keyword
+(3) Edit a website's reviews and ratings
+(4) Remove all websites with a 1 star rating
+(5) Display based on topic keyword
+(6) Display all websites
+(7) Monitor hashing performance
+(8) Quit
+
+When (1) is selected, the program will prompt for data to create a Website
+object. After that, it will insert the website into the hash table.
+
+When (2) is selected, the program will prompt for a char array from the user
+and then retrieve a website (or website(s)) based on the topic the user provides.
+
+When (3) is selected, the program will prompt for a website index (Based on the 
+display of the data in (6)) and check to make sure the website exists in the hash 
+table. If it does, the user can then edit the website's review and ratings after 
+the program prompts for that data.
+
+When (4) is selected, the program will remove all websites with a 1 star rating, and 
+display a confirmation message to confirm that the removal was successful.
+
+When (5) is selected, the program will prompt the user for a topic keyword,
+then display all websites with the keyword.
+
+When (6) is selected, all websites will be displayed in table form, as follows:
+Index		Topic Name		Website Address		Summary		Review		Rating
+
+When (7) is selected, the program will display information about the hashing 
+performance by displaying the length of each chain in the hash table.

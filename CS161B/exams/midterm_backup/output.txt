@@ -1,0 +1,45 @@
+Script started on 2023-05-07 11:20:02-07:00
+bash: cd: CS161B: No such file or directory
+bash: cd: CS161B: No such file or directory
+]0;jamie.dang@vmcslinuxprod01:~/CS161B/examsjamie.dang@vmcslinuxprod01:~/CS161B/exams $ ./midg++ -Wall -g mid.cpp -o mid./mid[K
+Welcome to the LIFO Stack Program!
+
+Enter option (r, p, q): p
+[8, -2, 3]
+
+Enter option (r, p, q): r
+Integer: -2
+[8]
+
+Enter option (r, p, q): dslkfjdlsjkflksdjflfsd
+Invalid Option.
+
+Enter option (r, p, q): 12.12.12.12.12
+Invalid Option.
+
+Enter option (r, p, q): r
+Integer: 5
+5 is not in the stack.
+[8]
+
+Enter option (r, p, q): R
+Integer: 3324/.324.23.42.3424324.34
+Error: Invalid Integer. Please try again.
+Integer: DFSSDFSFDSFS
+Error: Invalid Integer. Please try again.
+Integer: 8
+[]
+
+Enter option (r, p, q): @
+Invalid Option.
+
+Enter option (r, p, q): p
+[]
+
+Enter option (r, p, q): q
+
+Goodbye!
+]0;jamie.dang@vmcslinuxprod01:~/CS161B/examsjamie.dang@vmcslinuxprod01:~/CS161B/exams $ exit
+exit
+
+Script done on 2023-05-07 11:20:43-07:00

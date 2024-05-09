@@ -1,0 +1,22 @@
+// (public) sum of ints in list, calculated recursively
+int LinkedList::sumR() {
+	return _sumR(head);
+}
+
+// (private) Recursive helper function for sumR()
+int LinkedList::_sumR(Node * node) {
+	// recursive case: the list is not empty
+	if (node) {
+		return _sumR(node->next) + node->value;
+	}
+	// base case: the list is empty, return 0
+	return 0;
+}
+
+// Output:
+9 items:
+136, 106, 74, 79, 156, 244, 225, 90, 119
+total = 1229
+
+sum() =  1229
+sumR() = 1229
