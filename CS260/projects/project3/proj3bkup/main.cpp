@@ -3,7 +3,11 @@
 int main() {
 	Table aTable;
 	aTable.loadFromFile("data.txt");
-	aTable.display();
-	aTable.monitor();
+	
+	Table table2(aTable);
+	
+	table2.display();
+	table2.monitor();
+	
 	return 0;
 }

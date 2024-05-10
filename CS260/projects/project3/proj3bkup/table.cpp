@@ -6,8 +6,8 @@ Table::Table() : size(0) { // initialize size to 0
 		aTable[i] = nullptr;
 	}
 }
-Table::Table(const Table& aTable) {
-
+Table::Table(const Table& aTable) : aTable(nullptr), size(0) {
+	*this = aTable; // copy constructor uses assignment overload operator	
 }
 
 Table::~Table() {
