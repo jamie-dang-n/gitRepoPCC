@@ -1,4 +1,14 @@
 #include <cstring>
+#include <iostream>
+#include <iomanip>
+
+using namespace std;
+// Constants
+const int TOPIC_WIDTH = 20;
+const int ADDRESS_WIDTH = 25;
+const int SUMMARY_WIDTH = 45;
+const int REVIEW_WIDTH = 35;
+const int RATING_WIDTH = 7;	
 
 class Website {
 	private:
@@ -11,7 +21,7 @@ class Website {
 
 		// Helper function to initialize website data 
 		void init(const char * topic, const char * address, 
-				  const char * summary, const char * review, const int rating);
+				const char * summary, const char * review, const int rating);
 
 	public:	
 		// Constructors and destructors
@@ -20,7 +30,7 @@ class Website {
 				const char * summary, const char * review, const int rating);
 		Website(const Website& aSite);
 		~Website();
-	
+
 		// Getters
 		const char * getTopic() const;
 		const char * getAddress() const;
@@ -37,5 +47,5 @@ class Website {
 
 		// Operators
 		const Website& operator= (const Website& aSite);
-			
+		friend ostream& operator<< (ostream& out, const Website& aSite);	
 };

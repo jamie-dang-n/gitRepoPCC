@@ -12,6 +12,7 @@ Website::Website(const char * topic, const char * address,
 }
 
 Website::Website(const Website& aSite) {
+	init(aSite.topic, aSite.address, aSite.summary, aSite.review, aSite.rating);
 }
 
 Website::~Website() {
@@ -20,19 +21,19 @@ Website::~Website() {
 
 	// Deleting dynamic memory
 	if (topic) {
-		delete [] topic;
+		delete[] topic;
 	}
 
 	if (address) {
-		delete [] address;
+		delete[] address;
 	}
 
 	if (summary) {
-		delete [] summary;
+		delete[] summary;
 	}
 
 	if (review) {
-		delete [] review;
+		delete[] review;
 	}
 
 	topic = nullptr;
@@ -122,3 +123,12 @@ const Website& Website::operator= (const Website& aSite) {
 	return *this;	
 }
 
+ostream& operator<< (ostream& out, const Website& aSite) {
+	out << left << setw(TOPIC_WIDTH) << aSite.topic << ';';
+   	out << setw(ADDRESS_WIDTH) << aSite.address << ';';
+	out << setw(SUMMARY_WIDTH)  << aSite.summary << ';';
+	out << setw(REVIEW_WIDTH) << aSite.review << ';';
+	out << setw(RATING_WIDTH) << aSite.rating << endl;
+
+	return out;	
+}
