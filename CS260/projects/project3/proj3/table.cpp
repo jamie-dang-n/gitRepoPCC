@@ -7,7 +7,7 @@ Table::Table() : size(0) { // initialize size to 0
 	}
 }
 Table::Table(const Table& aTable) : aTable(nullptr), size(0) {
-	*this = aTable; // copy constructor uses assignment overload operator	
+	*this = aTable; // copy constructor uses assignment overload operator		
 }
 
 Table::~Table() {
@@ -19,15 +19,62 @@ Table::~Table() {
 // Purpose: adds an entry to the hash table, at the top of a chain
 // at the array location it is hashed to.
 void Table::add(const Website& aSite) {
-	int index = 0;
+	int index = calculateIndex(aSite);
 	Node * newNode = new Node(aSite);
 	newNode->next = aTable[index];
 	aTable[index] = newNode;
 	size++;
 }
 
-void Table::find() {
+
+// Purpose: retrieves all entries with a topic keyword and stores them in the 
+// 			matches[] array.
+bool Table::retrieve(char * topicKeyword, Website matches[], int & numFound) { 
+	bool success = false;
+	// use strstr([string to be scanned], [characters to match])
+	// to determine if the topicKeyword exists in an entry's "topic" member.
+	int tablePos = 0;
+	Node * curr = aTable[tablePos]; // point to the start of a chain
+	numFound = 0; // ensure that the number of items found start at 0.
+
+	while (!success && tablePos < currCapacity) {
+		if (curr) {
+			// retrieve through the whole chain if it exists
+			success = chainRetrieve(curr, matches, topicKeyword, numFound);
+		} // retrieval through chain completed
+		tablePos++; // move onto next chain
+		curr = aTable[tablePos];
+
+	} 	
+
+	curr = nullptr;
+	return success;
 }
+
+bool Table::chainRetrieve(Node * curr, Website matches[], char * topicKeyword, int & numFound) {
+	bool success = false;
+	char * websiteMatch = nullptr;
+	char currTopic[MAXCHAR];
+	Website currSite;
+	while (curr) {
+		strcpy(currTopic, curr->data.getTopic());
+		currSite = curr->data;
+		websiteMatch = strstr(currTopic, topicKeyword);
+		if (websiteMatch) {
+			// insert into matches[] array
+			matches[numFound] = currSite;
+			numFound++;
+			success = true;
+		}			
+		curr = curr->next;
+	}	
+	return success;
+}
+
+void Table::noCase(const char * src, char * dest) {
+
+}
+
 void Table::edit() { 
 }
 void Table::remove() { 
@@ -126,12 +173,12 @@ const Table& Table::operator= (const Table& srcTable) {
 	if (this->aTable)
 		destroy();
 
-	size = srcTable.size;
-	currCapacity = srcTable.currCapacity;
-	aTable = new Node*[currCapacity];
+	this->size = srcTable.size;
+	this->currCapacity = srcTable.currCapacity;
+	this->aTable = new Node*[currCapacity];
 
 	for (int i = 0; i < currCapacity; i++) {
-		aTable[i] = nullptr;
+		this->aTable[i] = nullptr;
 		copyChain(srcTable.aTable[i], this->aTable[i]);
 	}
 	return *this;
@@ -140,11 +187,19 @@ const Table& Table::operator= (const Table& srcTable) {
 
 
 // Private Methods
-// Hashing function
-int Table::calculateIndex(const char * key) const {
-	// to start, this is a very elementary hashing function
+// Hashing function, currently using topic as the key but 
+// I may update it later, hence const Website& aSite
+// FIXME: update hash function as needed
+int Table::calculateIndex(const Website& aSite) const {
 	int hash = 0;
-	return hash;	
+	int length = strlen(aSite.getAddress());
+
+	hash = hash % currCapacity;
+	length = strlen(aSite.getTopic());
+	for (int i = 0; i < length; i++) {
+		hash += aSite.getTopic()[i];
+	}
+	return hash % currCapacity;	
 }
 
 void Table::destroy() {
