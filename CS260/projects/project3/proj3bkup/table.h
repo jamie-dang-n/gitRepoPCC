@@ -16,9 +16,9 @@ class Table {
 		// Public Methods
 		void add(const Website& aSite);
 		bool retrieve(char * topicKeyword, Website matches[], int & numFound);
-		void edit();
-		void remove();
-		void displayTopic();
+		bool edit(char * topicKeyword, char * targetAddress, char * userReview, int userRating);
+		bool remove();
+		bool displayTopic(char * topicKeyword);
 		void display() const;
 		void monitor();
 		void loadFromFile(const char * fileName);
@@ -29,7 +29,8 @@ class Table {
 	private:
 		// Constants
 		const static int INIT_CAP = 5;
-		const static int MAXCHAR = 10l;
+		const static int MAX_CHAR = 200l;
+
 		// Data Members
 		struct Node {
 			// Node Constructor
@@ -47,15 +48,14 @@ class Table {
 			Node * next;
 		};
 		Node ** aTable;
-		int currCapacity;
-		int size;
+		int currCapacity; // holds the maximum capacity of the table
+		int size; 		  // holds the current number of entries in the table
 		// Private Methods
-		int calculateIndex(const Website& aSite) const; // hashing function
-		void destroy();
-		void destroyChain(Node *& currHead);
-		void copyChain(Node * srcHead, Node *& destHead);
-		void displayChain(Node * currHead) const;
-		int countChain(Node * currHead) const;
-		bool chainRetrieve(Node * curr, Website matches[], char * topicKeyword, int & numFound); // retrieve helper function
-		void noCase(const char * src, char * dest);
+		int calculateIndex(const char * key) const; 		// hashing function
+		void destroy(); 									// destroys the table
+		void destroyChain(Node *& currHead); 				// helper function for destroy()
+		void copyChain(Node * srcHead, Node *& destHead); 	// helper function to copy chains
+		void displayChain(Node * currHead) const; 			// helper function to display chains
+		int countChain(Node * currHead) const; 				// counts number of entries in a chain
+		void lowercase(char * temp); 						// sets temp char array to lowercase
 };

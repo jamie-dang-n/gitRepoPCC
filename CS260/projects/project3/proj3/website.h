@@ -20,9 +20,7 @@ class Website {
 		int rating;
 
 		// Helper function to initialize website data 
-		void init(const char * topic, const char * address, 
-				const char * summary, const char * review, const int rating);
-
+		void init(const char * topic, const char * address, const char * summary, const char * review, const int rating);
 	public:	
 		// Constructors and destructors
 		Website();

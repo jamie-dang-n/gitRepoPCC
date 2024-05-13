@@ -1,4 +1,6 @@
 #include "table.h"
+
+// Default constructor; sets everything to null
 Table::Table() : size(0) { // initialize size to 0
 	currCapacity = INIT_CAP; // initailize capacity
 	aTable = new Node*[currCapacity]; // allocate new array of node pointers
@@ -6,20 +8,31 @@ Table::Table() : size(0) { // initialize size to 0
 		aTable[i] = nullptr;
 	}
 }
+
+
+// copy constructor
 Table::Table(const Table& aTable) : aTable(nullptr), size(0) {
 	*this = aTable; // copy constructor uses assignment overload operator		
 }
 
+
+
+// destructor; calls destroy function to help
 Table::~Table() {
 	destroy();
 }
 
-// Public Methods
-// Name: add
+
+
+// **** Public Methods
+
+
+
+// Name: 	add
 // Purpose: adds an entry to the hash table, at the top of a chain
-// at the array location it is hashed to.
+// 			at the array location it is hashed to.
 void Table::add(const Website& aSite) {
-	int index = calculateIndex(aSite);
+	int index = calculateIndex(aSite.getTopic());
 	Node * newNode = new Node(aSite);
 	newNode->next = aTable[index];
 	aTable[index] = newNode;
@@ -27,62 +40,151 @@ void Table::add(const Website& aSite) {
 }
 
 
-// Purpose: retrieves all entries with a topic keyword and stores them in the 
+
+// Name: 	retrieve
+// Purpose: public function; retrieves all entries with a topic keyword and stores them in the 
 // 			matches[] array.
 bool Table::retrieve(char * topicKeyword, Website matches[], int & numFound) { 
 	bool success = false;
-	// use strstr([string to be scanned], [characters to match])
-	// to determine if the topicKeyword exists in an entry's "topic" member.
-	int tablePos = 0;
-	Node * curr = aTable[tablePos]; // point to the start of a chain
-	numFound = 0; // ensure that the number of items found start at 0.
+	lowercase(topicKeyword);
+	Node * currHead = nullptr;
+	Node * curr = nullptr;
+	char currTopic[MAX_CHAR];
 
-	while (!success && tablePos < currCapacity) {
-		if (curr) {
-			// retrieve through the whole chain if it exists
-			success = chainRetrieve(curr, matches, topicKeyword, numFound);
-		} // retrieval through chain completed
-		tablePos++; // move onto next chain
-		curr = aTable[tablePos];
+	numFound = 0;
 
-	} 	
-
-	curr = nullptr;
+	for (int i = 0; i < currCapacity; i++) {
+		currHead = aTable[i];
+		curr = currHead;
+		if (currHead) { // check that we've hashed into a non-null array entry
+			while (curr) { // check the chain, save the right entries to matches[]
+				strcpy(currTopic, curr->data.getTopic());
+				if (strstr(currTopic, topicKeyword)) {
+					matches[numFound] = curr->data;
+					numFound++;
+					success = true; // only true if we actually output data
+				}
+				curr = curr->next;
+			}	
+		}
+	}
 	return success;
 }
 
-bool Table::chainRetrieve(Node * curr, Website matches[], char * topicKeyword, int & numFound) {
+// Name: 	edit
+// Purpose: searches the table for a matching entry of topic "topicKeyword" and address "targetAddress".
+// 			if the entry is found, change the review of the website to userReview and the rating
+// 			to userRating.
+bool Table::edit(char * topicKeyword, char * targetAddress, char * userReview, int userRating) { 
 	bool success = false;
-	char * websiteMatch = nullptr;
-	char currTopic[MAXCHAR];
-	Website currSite;
-	while (curr) {
-		strcpy(currTopic, curr->data.getTopic());
-		currSite = curr->data;
-		websiteMatch = strstr(currTopic, topicKeyword);
-		if (websiteMatch) {
-			// insert into matches[] array
-			matches[numFound] = currSite;
-			numFound++;
-			success = true;
-		}			
-		curr = curr->next;
-	}	
+	lowercase(topicKeyword);
+	lowercase(targetAddress);
+	Node * currHead = nullptr;
+	Node * curr = nullptr;
+	char currAddress[MAX_CHAR] = {'\0'};
+	char currTopic[MAX_CHAR] = {'\0'};
+
+	for (int i = 0; i < currCapacity; i++) {
+		currHead = aTable[i];
+		curr = currHead;
+		if (currHead) { // check that we've hashed into a non-null array entry to find entry to edit
+			while (curr) { // check the chain, look for the entry with the right address and topic
+				strcpy(currAddress, curr->data.getAddress());
+				strcpy(currTopic, curr->data.getTopic());
+				if (strstr(currAddress, targetAddress) && strstr(currTopic, topicKeyword)) {
+					success = true; // entry has been found in the list
+					// edit data
+					curr->data.setReview(userReview);
+					curr->data.setRating(userRating);
+					break;
+				}
+				curr = curr->next;
+			}
+		}
+	}
 	return success;
 }
 
-void Table::noCase(const char * src, char * dest) {
+// Purpose: removes all table entries that have a rating of 1
+bool Table::remove() { 
+	bool success = false;
+	Node * currHead = nullptr;
+	Node * curr = nullptr;
+	Node * prev = nullptr;
+	Node * toDel = nullptr;
 
+	for (int i = 0; i < currCapacity; i++) { // check through each array entry
+		currHead = aTable[i];
+		if (aTable[i]) { // check that the head pointer for an array entry exists
+			// check the chain and remove
+			curr = currHead;
+			prev = nullptr;
+			while (curr) {
+				if (curr->data.getRating() == 1) {
+					// if there is a match, remove from the linked list
+					toDel = curr; // save entry to remove
+					if (!prev) {
+						// remove from start of the chain
+						aTable[i] = aTable[i]->next;
+						
+						// increment to next part
+						curr = curr->next;
+					}
+				   	else {
+						// remove from middle or end of the chain
+						// FIXME: getting an error here right now
+						prev->next = curr->next;
+						
+						// increment to next part
+						prev = curr; 
+						curr = curr->next;
+					}
+					// delete the entry
+					delete toDel;
+					toDel = nullptr;
+					success = true;
+				} else {
+					// increment to next part
+					prev = curr;
+					curr = curr->next;
+				}
+			}
+		}		
+	}
+	return success;	
 }
 
-void Table::edit() { 
-}
-void Table::remove() { 
+// Name: 	displayTopic
+// Purpose: display all table entries with the matching topic (aka, display an entire chain
+// 			since all entries in the chain have hashed the same topic)
+bool Table::displayTopic(char * topicKeyword) {
+	bool success = false;
+	lowercase(topicKeyword);
+	Node * currHead = nullptr;
+	Node * curr = nullptr;
+	char currTopic[MAX_CHAR] = {'\0'};
 
-}
-void Table::displayTopic() {
+	for (int i = 0; i < currCapacity; i++) { 
+		currHead = aTable[i];
+		curr = currHead;
+		if (currHead) { // check that we've hashed into a non-null array entry
+			while (curr) { // check the chain, print out the right entries
+				strcpy(currTopic, curr->data.getTopic());
+				if (strstr(currTopic, topicKeyword)) {
+					cout << curr->data;
+					success = true; // only true if we actually output data
+				}
+				curr = curr->next;
+			}	
+		}
+	}
+	return success;
 }
 
+
+
+// Name: 	display
+// Purpose: display the entire table, calling displayChain() for help
 void Table::display() const{	
 	cout << left << setw(TOPIC_WIDTH) << "Topic" << ';';
 	cout << setw(ADDRESS_WIDTH) << "Address" << ';';
@@ -95,14 +197,10 @@ void Table::display() const{
 	}
 }
 
-// Helper function to display the whole table
-void Table::displayChain(Node * currHead) const {
-	if (currHead) {
-		cout << currHead->data;
-		displayChain(currHead->next);
-	}
-}
 
+
+// Name: 	monitor
+// Purpose: displays the length of each chain in the table
 void Table::monitor() {
 	cout << "There are " << currCapacity << " chains in the table." << endl;
 	for (int i = 0; i < currCapacity; i++) {
@@ -110,6 +208,10 @@ void Table::monitor() {
 	}
 }
 
+
+
+// Name: 	countChain
+// Purpose: counts the number of entries in a chain recursively
 int Table::countChain(Node * currHead) const{
 	if (currHead) {
 		return countChain(currHead->next) + 1;
@@ -117,16 +219,19 @@ int Table::countChain(Node * currHead) const{
 	return 0;
 }
 
+
+
+// Name: 	loadFromFile
+// Purpose: load in data to a table from a file, fileName.txt
 void Table::loadFromFile(const char * fileName) {
 	ifstream inFile;
 	Website currSite; // website to read data into
 
 	// data members to read into
-	const int MAXCHAR = 101;
-	char topic[MAXCHAR];
-	char address[MAXCHAR];
-	char summary[MAXCHAR];
-	char review[MAXCHAR];
+	char topic[MAX_CHAR] = {'\0'};
+	char address[MAX_CHAR]= {'\0'};
+	char summary[MAX_CHAR]= {'\0'};
+	char review[MAX_CHAR]= {'\0'};
 	int rating = -1;
 
 	// open file
@@ -140,11 +245,13 @@ void Table::loadFromFile(const char * fileName) {
 	inFile.ignore(numeric_limits<streamsize>::max(), '\n');
 
 	// start reading loop
-	inFile.getline(topic, MAXCHAR, ';');
+	inFile.getline(topic, MAX_CHAR, ';');
+	lowercase(topic);
 	while (!inFile.eof()) {
-		inFile.getline(address, MAXCHAR, ';');
-		inFile.getline(summary, MAXCHAR, ';');
-		inFile.getline(review, MAXCHAR, ';');
+		inFile.getline(address, MAX_CHAR, ';');
+		lowercase(address);
+		inFile.getline(summary, MAX_CHAR, ';');
+		inFile.getline(review, MAX_CHAR, ';');
 		inFile >> rating;
 		inFile.ignore(5, '\n');
 
@@ -159,13 +266,16 @@ void Table::loadFromFile(const char * fileName) {
 		add(currSite);
 
 		// Continue reading
-		inFile.getline(topic, MAXCHAR, ';');
+		inFile.getline(topic, MAX_CHAR, ';');
+		lowercase(topic);
 	}	
 
 	inFile.close(); // close file
 }
 
-// Operators
+// **** Operators
+
+// Assignment operator overload
 const Table& Table::operator= (const Table& srcTable) {
 	if (this == &srcTable) 
 		return *this;
@@ -186,22 +296,39 @@ const Table& Table::operator= (const Table& srcTable) {
 
 
 
-// Private Methods
-// Hashing function, currently using topic as the key but 
-// I may update it later, hence const Website& aSite
-// FIXME: update hash function as needed
-int Table::calculateIndex(const Website& aSite) const {
-	int hash = 0;
-	int length = strlen(aSite.getAddress());
 
-	hash = hash % currCapacity;
-	length = strlen(aSite.getTopic());
+// *** Private Methods
+
+
+
+// Name: 	displayChain
+// Purpose: helper function for display(); displays all data in each chain
+void Table::displayChain(Node * currHead) const {
+	if (currHead) {
+		cout << currHead->data;
+		displayChain(currHead->next);
+	}
+}
+
+
+
+// Name: 	calculateIndex
+// Purpose: Hashing function, currently using topic as the key 
+int Table::calculateIndex(const char * topic) const {
+	int hash = 0;
+	int length = strlen(topic);
 	for (int i = 0; i < length; i++) {
-		hash += aSite.getTopic()[i];
+		if (isalpha(topic[i])) 
+			hash += topic[i];	
 	}
 	return hash % currCapacity;	
 }
 
+
+
+
+// Name: 	destroy
+// Purpose: calls destroyChain to destroy the table 
 void Table::destroy() {
 	for (int i = 0; i < currCapacity; i++) {
 		destroyChain(aTable[i]);
@@ -209,6 +336,12 @@ void Table::destroy() {
 	if(aTable)
 		delete[] aTable;
 }
+
+
+
+
+// Name: 	destroyChain
+// Purpose: deletes data from an entire chain
 void Table::destroyChain(Node *& currHead) { 
 	if (currHead) {
 		destroyChain(currHead->next);
@@ -217,6 +350,11 @@ void Table::destroyChain(Node *& currHead) {
 	}
 }
 
+
+
+
+// Name: 	copyChain
+// Purpose: helper function to copy over entire chains
 void Table::copyChain(Node * srcHead, Node *& destHead) {
 	if (srcHead) {
 		destHead = new Node(srcHead->data);
@@ -224,3 +362,15 @@ void Table::copyChain(Node * srcHead, Node *& destHead) {
 	}
 }
 
+
+
+
+// Name: 	lowercase
+// Purpose: turn the given char array to a lowercase
+// 			version of itself
+void Table::lowercase(char * temp) {
+	int length = strlen(temp);
+	for (int i = 0; i < length; i++) {
+		temp[i] = tolower(temp[i]);
+	}
+}

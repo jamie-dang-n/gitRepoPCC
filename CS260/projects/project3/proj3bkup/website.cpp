@@ -1,9 +1,11 @@
 #include "website.h"
 
+// Default Constructor
 Website::Website() : topic(nullptr), address(nullptr), summary(nullptr),
 					 review(nullptr), rating(-1) {
 }
 
+// Parameterized Constructor
 Website::Website(const char * topic, const char * address, 
 				const char * summary, const char * review, const int rating)
 				: topic(nullptr), address(nullptr), summary(nullptr),
@@ -11,10 +13,12 @@ Website::Website(const char * topic, const char * address,
 	init(topic, address, summary, review, rating);
 }
 
+// Copy COnstructor
 Website::Website(const Website& aSite) {
 	init(aSite.topic, aSite.address, aSite.summary, aSite.review, aSite.rating);
 }
 
+// Destructor
 Website::~Website() {
 	// setting non-dynamic variables to null values
 	rating = -1;
@@ -42,7 +46,7 @@ Website::~Website() {
 	review = nullptr;
 }
 
-// Getters
+// **** Getters
 const char * Website::getTopic() const {
 	return topic;
 }
@@ -63,7 +67,7 @@ int Website::getRating() const {
 	return rating;
 }	
 
-// Setters
+// **** Setters
 void Website::setTopic(const char * topic) {
 	if (this->topic) {
 		delete[] this->topic;
@@ -104,7 +108,10 @@ void Website::setRating(const int rating) {
 	this->rating = rating;
 }
 
-// Private helper
+// **** Private Methods
+
+// Name:    init
+// Purpose: helper function that calls all setters to set data members to arguments given
 void Website::init(const char * topic, const char * address, 
 				   const char * summary, const char * review, const int rating) {
 	setTopic(topic);
@@ -114,7 +121,9 @@ void Website::init(const char * topic, const char * address,
 	setRating(rating);
 }
 
-// Operator
+// **** Operators
+
+// Assignment operator overload
 const Website& Website::operator= (const Website& aSite) {
 	if (this == &aSite) {
 		return *this;
@@ -123,6 +132,7 @@ const Website& Website::operator= (const Website& aSite) {
 	return *this;	
 }
 
+// Insertion operator overload
 ostream& operator<< (ostream& out, const Website& aSite) {
 	out << left << setw(TOPIC_WIDTH) << aSite.topic << ';';
    	out << setw(ADDRESS_WIDTH) << aSite.address << ';';
@@ -132,3 +142,4 @@ ostream& operator<< (ostream& out, const Website& aSite) {
 
 	return out;	
 }
+
