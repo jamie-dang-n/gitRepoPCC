@@ -1,3 +1,9 @@
+// Author: Jamie Dang
+// Date: 5/14/2024
+// Program Number: CS260 Project 3
+// Purpose: header file for the Table class.
+// Module name: table.h
+
 #include <iostream>
 #include <iomanip>
 #include <fstream>
@@ -33,6 +39,7 @@ class Table {
 
 		// Data Members
 		struct Node {
+
 			// Node Constructor
 			Node() {
 				next = nullptr;
@@ -46,10 +53,13 @@ class Table {
 			// Node data members
 			Website data;
 			Node * next;
+
 		};
+
 		Node ** aTable;
 		int currCapacity; // holds the maximum capacity of the table
 		int size; 		  // holds the current number of entries in the table
+
 		// Private Methods
 		int calculateIndex(const char * key) const; 		// hashing function
 		void destroy(); 									// destroys the table

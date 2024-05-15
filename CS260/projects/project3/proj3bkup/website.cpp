@@ -1,3 +1,9 @@
+// Author: Jamie Dang
+// Date: 5/14/2024
+// Program Number: CS260 Project 3
+// Purpose: implementation file for Website class.
+// Module name: website.cpp
+
 #include "website.h"
 
 // Default Constructor
@@ -13,7 +19,7 @@ Website::Website(const char * topic, const char * address,
 	init(topic, address, summary, review, rating);
 }
 
-// Copy COnstructor
+// Copy Constructor
 Website::Website(const Website& aSite) {
 	init(aSite.topic, aSite.address, aSite.summary, aSite.review, aSite.rating);
 }

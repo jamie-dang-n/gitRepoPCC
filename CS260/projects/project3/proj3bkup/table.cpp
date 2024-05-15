@@ -1,6 +1,13 @@
+// Author: Jamie Dang
+// Date: 5/14/2024
+// Program Number: CS260 Project 3
+// Purpose: Implementation file for table class. The table class is implemented
+// using a hash table.
+// Module name: table.cpp
+
 #include "table.h"
 
-// Default constructor; sets everything to null
+// Default Constructor; sets everything to null
 Table::Table() : size(0) { // initialize size to 0
 	currCapacity = INIT_CAP; // initailize capacity
 	aTable = new Node*[currCapacity]; // allocate new array of node pointers
@@ -10,14 +17,14 @@ Table::Table() : size(0) { // initialize size to 0
 }
 
 
-// copy constructor
+// Copy Constructor
 Table::Table(const Table& aTable) : aTable(nullptr), size(0) {
 	*this = aTable; // copy constructor uses assignment overload operator		
 }
 
 
 
-// destructor; calls destroy function to help
+// Cestructor; calls destroy function to help
 Table::~Table() {
 	destroy();
 }
@@ -42,8 +49,7 @@ void Table::add(const Website& aSite) {
 
 
 // Name: 	retrieve
-// Purpose: public function; retrieves all entries with a topic keyword and stores them in the 
-// 			matches[] array.
+// Purpose: retrieves all entries with a topic keyword and stores them in the matches[] array.
 bool Table::retrieve(char * topicKeyword, Website matches[], int & numFound) { 
 	bool success = false;
 	lowercase(topicKeyword);
@@ -105,6 +111,7 @@ bool Table::edit(char * topicKeyword, char * targetAddress, char * userReview, i
 	return success;
 }
 
+// Name: 	remove
 // Purpose: removes all table entries that have a rating of 1
 bool Table::remove() { 
 	bool success = false;
@@ -154,9 +161,11 @@ bool Table::remove() {
 	return success;	
 }
 
+
+
 // Name: 	displayTopic
-// Purpose: display all table entries with the matching topic (aka, display an entire chain
-// 			since all entries in the chain have hashed the same topic)
+// Purpose: display all table entries with the matching topic. Partial searches 
+// 			for topics are allowed, so we do not use the hashing function.  
 bool Table::displayTopic(char * topicKeyword) {
 	bool success = false;
 	lowercase(topicKeyword);
@@ -164,7 +173,7 @@ bool Table::displayTopic(char * topicKeyword) {
 	Node * curr = nullptr;
 	char currTopic[MAX_CHAR] = {'\0'};
 
-	for (int i = 0; i < currCapacity; i++) { 
+	for (int i = 0; i < currCapacity; i++) {
 		currHead = aTable[i];
 		curr = currHead;
 		if (currHead) { // check that we've hashed into a non-null array entry
@@ -208,16 +217,6 @@ void Table::monitor() {
 	}
 }
 
-
-
-// Name: 	countChain
-// Purpose: counts the number of entries in a chain recursively
-int Table::countChain(Node * currHead) const{
-	if (currHead) {
-		return countChain(currHead->next) + 1;
-	}
-	return 0;
-}
 
 
 
@@ -313,7 +312,7 @@ void Table::displayChain(Node * currHead) const {
 
 
 // Name: 	calculateIndex
-// Purpose: Hashing function, currently using topic as the key 
+// Purpose: Hashing function, using topic as the key 
 int Table::calculateIndex(const char * topic) const {
 	int hash = 0;
 	int length = strlen(topic);
@@ -328,7 +327,7 @@ int Table::calculateIndex(const char * topic) const {
 
 
 // Name: 	destroy
-// Purpose: calls destroyChain to destroy the table 
+// Purpose: calls destroyChain() to destroy the table 
 void Table::destroy() {
 	for (int i = 0; i < currCapacity; i++) {
 		destroyChain(aTable[i]);
@@ -373,4 +372,15 @@ void Table::lowercase(char * temp) {
 	for (int i = 0; i < length; i++) {
 		temp[i] = tolower(temp[i]);
 	}
+}
+
+
+
+// Name: 	countChain
+// Purpose: counts the number of entries in a chain recursively
+int Table::countChain(Node * currHead) const{
+	if (currHead) {
+		return countChain(currHead->next) + 1;
+	}
+	return 0;
 }

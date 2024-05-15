@@ -1,3 +1,9 @@
+// Author: Jamie Dang
+// Date: 5/14/2024
+// Program Number: CS260 Project 3
+// Purpose: header file for main.cpp
+// Module name: main.h
+
 #include <iostream>
 #include <limits>
 #include "table.h"

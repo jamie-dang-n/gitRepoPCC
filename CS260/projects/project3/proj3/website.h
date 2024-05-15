@@ -1,8 +1,15 @@
+// Author: Jamie Dang
+// Date: 5/14/2024
+// Program Number: CS260 Project 3
+// Purpose: header file for the Website class. 
+// Module name: website.h
+
 #include <cstring>
 #include <iostream>
 #include <iomanip>
 
 using namespace std;
+
 // Constants
 const int TOPIC_WIDTH = 20;
 const int ADDRESS_WIDTH = 25;

@@ -15,7 +15,9 @@ Each website contains the following:
 
 Part 2: Table ADT
 This Table ADT will store Website objects. This ADT will be in the form of a hash
-table, with a (dynamic) array of pointers to linked lists.
+table, with a (dynamic) array of pointers to linked lists. The linked lists will be
+their own class.
+
 Table functions:
 1. Constructor
 2. Destructor (deallocates the hash table)

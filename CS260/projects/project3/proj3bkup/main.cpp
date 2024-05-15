@@ -1,3 +1,11 @@
+// Author: Jamie Dang
+// Date: 5/14/2024
+// Program Number: CS260 Project 3
+// Purpose: this is the client code to run the website topic tracker, 
+// 			using a hash table to implement the table ADT. Each entry 
+// 			is a Website object.
+// Module name: main.cpp
+
 #include "main.h"
 
 int main() {
@@ -13,6 +21,7 @@ int main() {
 	do {
 		displayMenu();
 		option = getInt(MENU_OPTIONS);
+		cout << endl; // blank line
 		exeMenu(option, aTable, sites, numFound);
 	} while (option != 8);
 
@@ -24,6 +33,7 @@ int main() {
 // **** Function Definitions
 
 // Display Functions
+
 // Welcome Message
 void welcome() {
 	cout << "Welcome to the \"Website Topic Tracker\"!" << endl;

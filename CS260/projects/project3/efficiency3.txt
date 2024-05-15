@@ -1,0 +1,55 @@
+1. How well did the data structure selected perform for the assigned application?
+
+I think the data structure performed well for the application. The hashing function and 
+short length of the separate chains made inserting, finding, retrieving, etc., relatively
+quick to implement. However, because the hashing function was based on the topic of an entry,
+it was not possible to involve partial searches (for example, displaying by topic)
+unless I looked through the entire hash table. Luckily, the chains were relatively short, 
+so the searching didn't take too long. If I decided not to allow partial searches,
+then the data structure would've performed even faster, because I could skip incrementing 
+through the array, and instead hash directly to the entry I need.
+
+2. Would a different data structure work better? If so, which one and why...
+
+I decided to allow partial searches because I feel that for a data base that a person
+would use to search up all related topics/entries, then partial searches
+would be really helpful for a person's research. However, hash tables require the 
+key to be very specific. If the key has a different value (like for a partial search),
+the hash function may not hash the search into the right separate chain.
+I had trouble using my hashing functions in other operations, like editing entries 
+or displaying certain topics, because I allowed the user to do a partial search. In 
+those instances, I lost some hash table functionality, because I wanted to give the 
+user flexibility. I feel as though hash tables would work best if the key used for the 
+hashing was always going to be specific. For example, employee ID numbers are specific 
+and must be entered in full. In those cases, I think a hash table makes a lot of sense 
+to use. Since the key could not possibly be simplified, the hashing function could 
+be used to make editing entries, removing entries, etc, much faster, by being able to 
+move directly into the correct chain. However, for this project, since the topic could 
+allow partial searches (for example, searching "computer" for "computer science"), the 
+key won't stay specific unless the developer restricts the user to be specific. 
+I think for an application where the key is flexible, a hash table is okay, but we 
+won't get the same usefulness out of the hashing function as we would for an application 
+where the key is inflexible. 
+
+3. What was efficient about your design and use of the data structure?
+
+Since the data for a project like this is not too large, I felt like my hashing function 
+sufficiently spread out data into the array. Moreover, since the hash table included an array
+of head pointers, it was easy to quickly access various parts of the table. The array allowed
+me to have instant access to the head of multiple separate chains, which were all short.  
+
+4. What was not efficient?
+
+I think that since I allowed partial searches, my public methods were less efficient. 
+If I disallowed partial searches and only let the user enter in exact values,
+then I could have used my hashing function instead of iterating through the entire table to 
+find target values/entries.
+
+5. What would you do differently if you had more time to solve the problem?
+
+If I had more time, I would want to come up with a more efficient algorithm for the public methods
+that would allow partial searches, but also make use of my hashing function. Moreover, I'd like 
+to make my hashing function more sophisticated. As the function is right now, it is sufficient
+for smaller datasets. However, if the data set was very large, the hashing function will be 
+insufficient for spreading out the data evenly. This is even more true because the key
+for the hashing function is the topic, which is not necessarily unique for every entry. 
