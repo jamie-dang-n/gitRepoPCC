@@ -70,7 +70,7 @@ When (5) is selected, the program will prompt the user for a topic keyword,
 then display all websites with the keyword.
 
 When (6) is selected, all websites will be displayed in table form, as follows:
-Index		Topic Name		Website Address		Summary		Review		Rating
+Topic Name		Website Address		Summary		Review		Rating
 
 When (7) is selected, the program will display information about the hashing 
 performance by displaying the length of each chain in the hash table.
