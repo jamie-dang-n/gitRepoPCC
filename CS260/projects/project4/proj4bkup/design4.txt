@@ -1,0 +1,86 @@
+Design Document: Project 4
+Author: Jamie Dang
+Date: 5/15/2024
+
+Purpose: This program will use a BST to store websites by address keyword.
+
+Part 1: Website Class
+The Website Class will be what I use to make Website objects for the Table ADT.
+Each website contains the following:
+1. Topic Name [char *]
+2. Keyword [char *, this will be unique for each site and will be used for sorting/searching]
+3. Website address [char *]
+4. Summary of website [char *]
+5. Website Review [char *]
+6. Rating [int, 1 through 5]
+
+Part 2: BST Node Class
+For the binary search tree, we will use "BST Node" struct objects to create the
+nodes within the tree. Each node will contain the following:
+1. Data (a Website object)
+2. A left child pointer
+3. A right child pointer
+If a node has no children, the pointers point to null. The struct for the 
+nodes will be created within the BST class (private).
+
+Part 3: BST Class
+The BST will store BST Nodes, which hold Website objects as data members.
+The BST class will implement the Binary Search Tree ADT and store values
+based on a website's unique keyword. The BST class will have a Node pointer
+that points to the "root" of the entire tree.
+
+BST Functions:
+1. Constructor: initialize all data members.
+2. Destructor: deallocate all dynamic memory adn reset data members to 
+	equivalent 0 value. This will use postoder traversal and will
+	delete recursively.
+3. Insert: add a new topic based on the keyword in the website address.
+4. Remove all matches to a topic name
+5. Remove a particular website based on keyword (only one match)
+6. Retrieve information about a particular website based on its keyword
+	(this will NOT display information, just return it back)
+7. Display all websites (sorted alphabetically by keyword, so this will
+	be inorder traversal)
+8. Monitor the height of the tree 
+
+Part 4: Driver/Client Code
+The driver will first populate the BST with data from data.txt.
+Then, it will enter a menu that looks like the following:
+(Note that when incorrect data is entered, the program will accordingly
+reprompt until the correct data is entered.)
+
+Website Topic Tracker
+
+Please choose an option:
+
+(1) Add a new website by topic
+(2) Retrieve based on topic keyword
+(3) Edit a website's reviews and ratings
+(4) Remove all websites with a 1 star rating
+(5) Display based on topic keyword
+(6) Display all websites
+(7) Monitor tree height
+(8) Quit
+
+When (1) is selected, the program will prompt for data to create a Website
+object. After that, it will insert the website into the BST.
+
+When (2) is selected, the program will prompt for a char array from the user
+and then retrieve a website (or website(s)) based on the topic the user provides.
+
+When (3) is selected, the program will prompt for a website index (Based on the 
+display of the data in (6)) and check to make sure the website exists in the BST.
+If it does, the user can then edit the website's review and ratings after the program 
+prompts for that data.
+
+When (4) is selected, the program will remove all websites with a 1 star rating, and 
+display a confirmation message to confirm that the removal was successful.
+
+When (5) is selected, the program will prompt the user for a topic keyword,
+then display all websites with the keyword.
+
+When (6) is selected, all websites will be displayed in table form, as follows:
+Topic Name		Website Address		Summary		Review		Rating
+
+When (7) is selected, the program will display information about the height
+of the BST currently. 

@@ -1,11 +1,11 @@
 // Author: Jamie Dang
-// Date: 5/14/2024
-// Program Number: CS260 Project 3
+// Date: 
+// Program Number:
 // Purpose: header file for the Website class. 
 // Module name: website.h
 
 #ifndef WEBSITE_H
-#define ENTRY_H
+#define WEBSITE_H
 
 #include <cstring>
 #include <iostream>

@@ -1,0 +1,65 @@
+#ifndef BST_H
+#define BST_H
+
+#include <fstream>
+#include "website.h"
+
+using namespace std;
+
+class BST {
+	public:
+		// Constructor
+		BST();
+		
+		// Copy Constructor
+		BST(const BST& aTree);
+		
+		// Destructor
+		~BST();
+
+		// Public Methods
+		void loadFromFile(const char * fileName);
+		void add(const Website& aSite);
+		void removeTopic(const char * topic);
+		void removeSite(const char * keyword);
+		void retrieve(const char * keyword);
+
+		// Operator Overloads
+		const BST& operator= (const BST& aTree);
+		friend ostream& operator<< (ostream& out, const BST& aTree);
+
+	private:
+		// Node Struct
+		struct Node {
+			// data members
+			Website data;
+			Node * left;
+			Node * right;
+			
+			// parameterized constructor
+			Node(const Website& aSite) {
+				data = aSite;
+				left = right = nullptr;
+			};
+		};
+
+		// Constants
+		const static int MAX_CHAR = 101;
+
+		// Data Members
+		Node * root;
+		int size; // number of nodes in the tree
+
+		// Private Methods (Helpers)
+		void add(Node *& currRoot, const Website& aSite);
+		void remove(Node *& currRoot, const char * key, Website& aSite);
+		void deleteNode(Node *& target);
+		void destroy(Node *& currRoot);
+		void copy(Node * srcRoot, Node *& destRoot);
+		void displayInorder(Node * currRoot) const;
+		
+
+		void lowercase(char * temp);
+};
+
+#endif

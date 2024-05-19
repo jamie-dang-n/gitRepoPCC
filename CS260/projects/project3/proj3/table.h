@@ -4,6 +4,9 @@
 // Purpose: header file for the Table class.
 // Module name: table.h
 
+#ifndef TABLE_H
+#define TABLE_H
+
 #include <iostream>
 #include <iomanip>
 #include <fstream>
@@ -69,3 +72,5 @@ class Table {
 		int countChain(Node * currHead) const; 				// counts number of entries in a chain
 		void lowercase(char * temp); 						// sets temp char array to lowercase
 };
+
+#endif

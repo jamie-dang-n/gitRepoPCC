@@ -4,6 +4,9 @@
 // Purpose: header file for main.cpp
 // Module name: main.h
 
+#ifndef MAIN_H
+#define MAIN_H
+
 #include <iostream>
 #include <limits>
 #include "table.h"
@@ -27,3 +30,5 @@ void exeAdd(Table& aTable);
 void exeDisplayTopic(Table& aTable);
 void exeRetrieve(Table& aTable, Website sites[], int & numFound);
 void exeEdit(Table & aTable);
+
+#endif

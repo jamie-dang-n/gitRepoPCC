@@ -1,6 +1,6 @@
 // Author: Jamie Dang
-// Date: 5/14/2024
-// Program Number: CS260 Project 3
+// Date: 
+// Program Number:
 // Purpose: header file for main.cpp
 // Module name: main.h
 
@@ -9,11 +9,11 @@
 
 #include <iostream>
 #include <limits>
-#include "table.h"
+#include "bst.h"
 
 using namespace std;
 
-
+/*
 // Constants
 const int MENU_OPTIONS = 1;
 const int RATING_OPTIONS = 2;
@@ -30,5 +30,6 @@ void exeAdd(Table& aTable);
 void exeDisplayTopic(Table& aTable);
 void exeRetrieve(Table& aTable, Website sites[], int & numFound);
 void exeEdit(Table & aTable);
+*/
 
 #endif

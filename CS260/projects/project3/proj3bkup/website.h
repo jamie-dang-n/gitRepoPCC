@@ -4,6 +4,9 @@
 // Purpose: header file for the Website class. 
 // Module name: website.h
 
+#ifndef WEBSITE_H
+#define ENTRY_H
+
 #include <cstring>
 #include <iostream>
 #include <iomanip>
@@ -54,3 +57,5 @@ class Website {
 		const Website& operator= (const Website& aSite);
 		friend ostream& operator<< (ostream& out, const Website& aSite);	
 };
+
+#endif
