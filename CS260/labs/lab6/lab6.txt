@@ -1,0 +1,64 @@
+// Finds the height of the tree by looking at the height of both subtrees
+int height(node * root) {
+	if (!root) {
+		return 0;
+	} else {
+		int left = height(root->left); // look at height of left subtree
+		int right = height(root->right); // look at height of right subtree
+
+		// compare heights and return the higher one
+		if (left > right) {
+			return left + 1;
+		} else {
+			return right + 1;
+		}
+	}
+}
+
+// Program Output
+Welcome to the Proficiency Demo!
+
+Inorder traversal: 1  2  16  18  20  32  36  37  63  77  89  100  100  124  146  162  173  180  210  242  
+
+Level 1: 63
+Level 2: 1 and 100
+Level 3: 36
+Level 4: 16 and 37
+Level 5: 2 and 32
+Level 6: 18
+Level 7: 20
+Level 3: 89 and 146
+Level 4: 77
+Level 4: 124 and 242
+Level 5: 100
+Level 5: 180
+Level 6: 162 and 210
+Level 7: 173
+
+
+This tree contains 20 items 
+Recursive count: 20
+Recursive sum: 1828
+Height of the tree: 7
+
+
+The resulting tree after your function ran is: 
+Inorder traversal: 1  2  16  18  20  32  36  37  63  77  89  100  100  124  146  162  173  180  210  242  
+
+Level 1: 63
+Level 2: 1 and 100
+Level 3: 36
+Level 4: 16 and 37
+Level 5: 2 and 32
+Level 6: 18
+Level 7: 20
+Level 3: 89 and 146
+Level 4: 77
+Level 4: 124 and 242
+Level 5: 100
+Level 5: 180
+Level 6: 162 and 210
+Level 7: 173
+
+
+This tree contains 20 items 

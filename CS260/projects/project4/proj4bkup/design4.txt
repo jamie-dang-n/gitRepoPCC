@@ -53,14 +53,13 @@ Website Topic Tracker
 
 Please choose an option:
 
-(1) Add a new website by topic
-(2) Retrieve based on topic keyword
-(3) Edit a website's reviews and ratings
-(4) Remove all websites with a 1 star rating
-(5) Display based on topic keyword
-(6) Display all websites
-(7) Monitor tree height
-(8) Quit
+(1) Add a new website by keyword
+(2) Remove a website based on a keyword (one match)
+(3) Remove all websites with a topic (all matches)
+(4) Retrieve a site (based on keyword)
+(5) Display all websites alphabetically
+(6) Monitor tree height
+(7) Quit
 
 When (1) is selected, the program will prompt for data to create a Website
 object. After that, it will insert the website into the BST.

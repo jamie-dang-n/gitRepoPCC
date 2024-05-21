@@ -13,7 +13,6 @@
 
 using namespace std;
 
-/*
 // Constants
 const int MENU_OPTIONS = 1;
 const int RATING_OPTIONS = 2;
@@ -25,11 +24,11 @@ void welcome();
 void displayMenu();
 int getInt(const int id);
 bool validInt(const int id, int num);
-void exeMenu(int option, Table& aTable, Website sites[], int & numFound);
-void exeAdd(Table& aTable);
-void exeDisplayTopic(Table& aTable);
-void exeRetrieve(Table& aTable, Website sites[], int & numFound);
-void exeEdit(Table & aTable);
-*/
+void exeMenu(int option, BST& aTree, Website sites[], int & numFound);
+bool exeRemoveTopic(BST& aTree);
+void exeAdd(BST& aTree);
+void exeDisplayTopic(BST& aTree);
+void exeRetrieve(BST& aTree, Website sites[], int & numFound);
+void exeEdit(BST & aTree);
 
 #endif
