@@ -1,6 +1,6 @@
 // Author: Jamie Dang
-// Date: 
-// Program Number:
+// Date: 5/22/24
+// Program Number: Project 4
 // Purpose: header file for main.cpp
 // Module name: main.h
 

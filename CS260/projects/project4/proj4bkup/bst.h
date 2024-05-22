@@ -1,3 +1,9 @@
+// Author: Jamie Dang
+// Date: 5/22/24
+// Program Number: Project 4
+// Purpose: header file for the binary search tree class 
+// Module name: bst.h
+
 #ifndef BST_H
 #define BST_H
 
@@ -63,7 +69,7 @@ class BST {
 		void displayInorder(Node * currRoot) const;	
 		int heightR(Node * currRoot) const;
 		void lowercase(char * temp);
-		Node* retrieveR(const char * keyword, Website& aSite, Node * currRoot);
+		Node* retrieveR(const char * keyword, Node * currRoot);
 };
 
 #endif

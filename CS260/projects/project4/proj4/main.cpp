@@ -1,9 +1,8 @@
 // Author: Jamie Dang
-// Date: 
-// Program Number:
+// Date: 5/22/24
+// Program Number: Project 4
 // Purpose: this is the client code to run the website topic tracker, 
-// 
-//
+// 			using a Binary Search Tree (BST) to store the websites.
 // Module name: main.cpp
 
 #include "main.h"
@@ -51,6 +50,7 @@ void displayMenu() {
 }
 
 
+
 // Name: 	getInt
 // Purpose: receive an integer from the user, checks the validity based on
 // 			const int id. returns the integer after receiving valid input.
@@ -93,15 +93,15 @@ bool validInt(const int id, int num) {
 }
 
 
+
 // Name: 	exeMenu
-// Purpose: executes all menu options with Table public methods and helper functions
+// Purpose: executes all menu options with aTree public methods and helper functions
 void exeMenu(int option, BST& aTree, Website sites[], int & numFound) {
 	switch(option) {
 		case 1:
 			exeAdd(aTree);
 			break;
 		case 2:
-			// FIXME: fix the removeSite function of the tree
 			if (exeRemoveSite(aTree)) {
 				cout << "Removal successful." << endl;
 			} else {
@@ -109,7 +109,6 @@ void exeMenu(int option, BST& aTree, Website sites[], int & numFound) {
 			}
 			break;
 		case 3:
-			// FIXME: fix the removeTopic function of the tree
 			if (exeRemoveTopic(aTree)) {
 				cout << "Removal successful." << endl;
 			} else {
@@ -135,6 +134,9 @@ void exeMenu(int option, BST& aTree, Website sites[], int & numFound) {
 }
 
 
+
+// Name: 	exeRemoveSite
+// Purpose: receives user input to remove a particular site from the tree
 bool exeRemoveSite(BST& aTree) {
 	char key[MAX_CHAR];
 	cout << "Enter a site keyword (case sensitive & full key required): ";
@@ -143,6 +145,11 @@ bool exeRemoveSite(BST& aTree) {
 	return aTree.removeSite(key);
 }
 
+
+
+// Name: exeRemoveTopic
+// Purpose: receives user input to remove all sites with a particular topic
+// 			from the tree 
 bool exeRemoveTopic(BST& aTree) {
 	char topic[MAX_CHAR];
 	cout << "Enter a topic: ";
@@ -150,6 +157,8 @@ bool exeRemoveTopic(BST& aTree) {
 	cin.getline(topic, MAX_CHAR, '\n');
 	return aTree.removeTopic(topic);
 }
+
+
 
 // Name: 	exeAdd
 // Purpose: receives user input, creates a new website, then adds it to the 
@@ -191,7 +200,10 @@ void exeAdd(BST& aTree) {
 	aTree.add(aSite);
 }
 
+
+
 // Name: 	exeRetrieve
+// Purpose: receives user input to find a particular website from the tree
 void exeRetrieve(BST& aTree) {
 	Website aSite;
 	char key[MAX_CHAR] = {'\0'};

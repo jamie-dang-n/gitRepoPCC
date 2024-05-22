@@ -6,6 +6,7 @@ Purpose: This program will use a BST to store websites by address keyword.
 
 Part 1: Website Class
 The Website Class will be what I use to make Website objects for the Table ADT.
+
 Each website contains the following:
 1. Topic Name [char *]
 2. Keyword [char *, this will be unique for each site and will be used for sorting/searching]
@@ -14,12 +15,14 @@ Each website contains the following:
 5. Website Review [char *]
 6. Rating [int, 1 through 5]
 
-Part 2: BST Node Class
+Part 2: BST Node
 For the binary search tree, we will use "BST Node" struct objects to create the
 nodes within the tree. Each node will contain the following:
+
 1. Data (a Website object)
 2. A left child pointer
 3. A right child pointer
+
 If a node has no children, the pointers point to null. The struct for the 
 nodes will be created within the BST class (private).
 
@@ -64,22 +67,21 @@ Please choose an option:
 When (1) is selected, the program will prompt for data to create a Website
 object. After that, it will insert the website into the BST.
 
-When (2) is selected, the program will prompt for a char array from the user
-and then retrieve a website (or website(s)) based on the topic the user provides.
+When (2) is selected, the program will prompt for a keyword from the user and remove
+the website with the associated keyword
 
-When (3) is selected, the program will prompt for a website index (Based on the 
-display of the data in (6)) and check to make sure the website exists in the BST.
-If it does, the user can then edit the website's review and ratings after the program 
-prompts for that data.
+When (3) is selected, the program will prompt for a topic from the user and remove
+all websites with a matching topic 
 
-When (4) is selected, the program will remove all websites with a 1 star rating, and 
-display a confirmation message to confirm that the removal was successful.
+When (4) is selected, the program will prompt for a keyword from the user and display
+the website that matches the keyword 
 
-When (5) is selected, the program will prompt the user for a topic keyword,
-then display all websites with the keyword.
+When (5) is selected, all websites will be displayed in table form, as follows:
+Key		Topic Name		Website Address		Summary		Review		Rating
 
-When (6) is selected, all websites will be displayed in table form, as follows:
-Topic Name		Website Address		Summary		Review		Rating
+The websites will be in alphabetical order.
 
-When (7) is selected, the program will display information about the height
+When (6) is selected, the program will display information about the height
 of the BST currently. 
+
+When (7) is selected, the program will send a "thank you" message and end execution.

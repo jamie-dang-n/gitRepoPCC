@@ -1,6 +1,7 @@
 Topic;Key;Website;Summary;Review;Rating
 History;Historical Awesome;historicalawesome.com;an online history textbook;fun and interactive;1
 Media;Reddit;reddit.com;a forum to ask questions;confusing to use;2
+Animals;Cool Animals;animalsarecool.com;a place to learn fun facts about aninals;questionable accuracy;3
 Computer Science;C Plus Plus Tutor;cplusplustutor.com;a code visualizer;incredibly useful for debugging;5
 Animals;National Geographic;netgeographic.org;national geographic's website;intriguing info;3
 Media;Youtube;youtube.com;a place to share and host your own videos;a little boring;3

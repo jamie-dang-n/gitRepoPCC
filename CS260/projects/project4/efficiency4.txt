@@ -1,0 +1,39 @@
+1. How well did the data structure selected perform for the assigned application?
+The data structure performed really well for the assigned application. It was easy to access
+values-- in particular, when we searched using the key value for the tree. In doing this,
+we could do a binary search, which has really great performance. Without the search key,
+it would have been much less efficient to use. The appeal of the BST was the search key and
+the structure of the tree, which allows us to use binary search frequently.
+
+2. Would a different data structure work better? If so, which one and why...
+I'm not sure what data structure would work better. I felt like the binary search tree
+worked really well as long as we used the key value that the tree was sorted by. By doing
+this, the tree could use binary search during traversals every time. The only extra caveat
+was that the key value had to be unique for each entry, which could be difficult for larger tables. 
+
+3. What was efficient about your design and use of the data structure?
+I thought that my design was efficient in that I made use of the key value multiple times. Thus,
+I was able to use the binary search in multiple applications, such as adding to the tree, removing
+a particular site to the tree, or finding an item in the tree according to key value. By using 
+the binary search, the algorithm was about as efficient as we could get it.
+
+4. What was not efficient?
+Removing multiple items from the tree in one pass was more difficult. I had to start with
+post-order traversal, going through every node in the tree to find the nodes to remove. This 
+made removing nodes by topic less efficient than removing a single node, since we couldn't do
+our searches according to the binary search (due to the search being for the topic, not the 
+key value). Luckily, only one pass through in post-order was needed to achieve this operation. 
+
+Moreover, if the text file that I imported data from was in alphabetical order already, the
+tree structure would quickly degrade into that of a linear linked list. Thus, I had to be careful to 
+make my data file in a random order. That way, the tree wouldn't turn into a linear linked list. 
+If the tree does go linear, it removes all of the appeal of using a binary search tree, and we are 
+ultimately left with a linear linked list.
+
+5. What would you do differently if you had more time to solve the problem?
+If I had more time to solve the problem, I'd want to implement algorithms to ensure that the tree stays
+balanced. The more balanced a tree is, the better it will perform. I didn't include automatic tree
+restructuring, becuase we focused primarily on binary search trees for this module. However, if I could,
+I would consider experimenting with a 2-3-4 tree or a red-black tree to improve the program's efficiency.
+Keeping a balanced tree would remove the issue of the tree's structure being unbalanced, which may lead 
+to the tree becoming a linear linked list later.
