@@ -16,6 +16,8 @@ BST::~BST() {
 
 // **** Public Methods
 
+// Purpose: display the entire tree in alphabetical order.
+// 			calls displayInorder() to help
 void BST::display() {
 	cout << left << setw(KEY_WIDTH) << "Key" << ';';
    	cout << setw(TOPIC_WIDTH) << "Topic" << ';';
@@ -26,20 +28,59 @@ void BST::display() {
 	displayInorder(root);
 }
 
-// Purpose: add a node to the tree
+// Purpose: add a node to the tree, using the overloaded
+// 			recursive add() function to help.
 void BST::add(const Website& aSite) {
 	add(this->root, aSite);
 	size++;
 }
 
+// Purpose: remove a site from the tree, using the 
+// 			recursive removeSiteR() function to help.
+bool BST::removeSite(const char * keyword) {
+	bool success = false;
+	int temp = size;
+
+	removeSiteR(keyword, root);
+
+	if (temp > size) {
+		// item was removed
+		success = true;
+	}
+
+	return success;
+
+}
+
+// Purpose: remove all sites with a particular topic from
+// 			the tree, using the recursive removeTopicR() 
+// 			function to help.
 bool BST::removeTopic(const char * topic) {
 	bool success = false;
 	int temp = size;
+
 	removeTopicR(topic, root);
-	if (size < temp) {
+	
+	if (temp > size) {
+		// item was removed
 		success = true;
 	}
+
 	return success;
+}
+
+
+// Purpose: retrieve a site from the tree by reference, 
+// 			using the recursive retrieveR() function to help.
+bool BST::retrieve(const char * keyword, Website& aSite) {
+	Node * temp = nullptr;
+	temp = retrieveR(keyword, aSite, root);
+	if (!temp) {
+		return false;
+	} else {
+		aSite = temp->data;
+		return true;
+	}
 }
 
 // Purpose: load in data to the tree from the file fileName.txt
@@ -96,17 +137,18 @@ void BST::loadFromFile(const char * fileName) {
 	inFile.close(); // close file
 }
 
-int BST::monitor() {
-	return monitorR(root);
+// Purpose: returns the height of the tree using the 
+// 			recurisve function, heightR()
+int BST::height() {
+	return heightR(root);
 }
 
-// **** Private Methods (helpers)
+// **** Private Methods (helpers & recurisve functions)
 
 // Purpose: recursive helper function to insert a note into the BST based on key
 void BST::add(Node *& currRoot, const Website& aSite) {
 	if (!currRoot) { // add as a leaf
 		currRoot = new Node(aSite);
-		// FIXME: change from the topic to the keyword, implement website keyword first
 	} else if (strcmp(aSite.getKey(), currRoot->data.getKey()) < 0) {
 		// enter left side
 		add(currRoot->left, aSite);
@@ -135,7 +177,7 @@ void BST::destroy(Node *& currRoot) {
 	}
 }
 
-// FIXME: make sure this function works. LOL. 
+
 // Assumes that the target node does exist in the tree
 void BST::deleteNode(Node *& target) {
 	if (!target->left && !target->right) {
@@ -147,11 +189,13 @@ void BST::deleteNode(Node *& target) {
 		Node * temp = target;
 		target = target->left;
 		delete temp;
+		temp = nullptr;
 	} else if (!target->left) {
 		// Target node only has right child
 		Node * temp = target;
 		target = target->right;
 		delete temp;
+		temp = nullptr;
 	} else {
 		// Target node has 2 children
 		
@@ -172,25 +216,42 @@ void BST::deleteNode(Node *& target) {
 		}
 		target->data = curr->data;
 		delete curr;
+		prev = nullptr;
+		curr = nullptr;
 	}
 	size--;
 }
 
 
-
-void BST::removeTopicR(const char * topic, Node * currRoot) {
+void BST::removeSiteR(const char * keyword, Node *& currRoot) {
 	if (currRoot) {
+		int temp = strcmp(keyword, currRoot->data.getKey());
+		if (temp == 0) {
+			deleteNode(currRoot);
+		} else if (temp < 0) {
+			removeSiteR(keyword, currRoot->left);
+		} else {
+			removeSiteR(keyword, currRoot->right);
+		}
+	}
+}
+
+
+void BST::removeTopicR(const char * topic, Node *& currRoot) {
+	if (currRoot) { 
+		// postorder: start at the ends, then return to the root
+		removeTopicR(topic, currRoot->left);
+		removeTopicR(topic, currRoot->right);
+
 		// go through the entire tree and remove all nodes with a matching topic
-		char temp[MAX_CHAR];
+		char temp[MAX_CHAR] = {'\0'};	
 		strcpy(temp, topic);
 		lowercase(temp);
+
 		if (strcmp(currRoot->data.getTopic(), temp) == 0) {
 			// if the topic matches, remove the target node
 			deleteNode(currRoot);
-		}		
-		// continue recursing through both tree branches
-		removeTopicR(topic, currRoot->left);
-		removeTopicR(topic, currRoot->right);	
+		} 		
 	}
 }
 
@@ -204,9 +265,43 @@ void BST::displayInorder(Node * currRoot) const {
 	}	
 }
 
-int BST::monitorR(Node * currRoot) const {
-	// traverse in postorder, from left subtree to root
-	return 0;
+int BST::heightR(Node * currRoot) const {
+	if (!currRoot) {
+		return 0;
+	} else {
+		int left = heightR(currRoot->left);
+		int right = heightR(currRoot->right);
+
+		if (left > right) {
+			return left + 1;
+		} else {
+			return right + 1;
+		}
+	}
+}
+
+BST::Node* BST::retrieveR(const char * keyword, Website& aSite, Node * currRoot) {
+	if (!currRoot) {
+		return nullptr; 
+	} else if (strcmp(keyword, currRoot->data.getKey()) == 0) {
+		return currRoot; // item found
+	} else if (strcmp(keyword, currRoot->data.getKey()) < 0) {
+		// search left subtree
+		return retrieveR(keyword, aSite, currRoot->left);
+	} else {
+		// search right subtree
+		return retrieveR(keyword, aSite, currRoot->right);
+	}
+}
+
+// Name: 	lowercase
+// Purpose: turn the given char array to a lowercase
+// 			version of itselfvoid Table::lowercase(char * temp) {
+void BST::lowercase(char * temp) {
+	int length = strlen(temp);	
+	for (int i = 0; i < length; i++) {
+		temp[i] = tolower(temp[i]);
+	}
 }
 
 // Operator Overloads
@@ -223,13 +318,5 @@ const BST& BST::operator= (const BST& treeSrc) {
 
 
 
-// Name: 	lowercase
-// Purpose: turn the given char array to a lowercase
-// 			version of itselfvoid Table::lowercase(char * temp) {
-void BST::lowercase(char * temp) {
-	int length = strlen(temp);	
-	for (int i = 0; i < length; i++) {
-		temp[i] = tolower(temp[i]);
-	}
-}
+
 

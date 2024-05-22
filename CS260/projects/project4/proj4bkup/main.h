@@ -25,10 +25,9 @@ void displayMenu();
 int getInt(const int id);
 bool validInt(const int id, int num);
 void exeMenu(int option, BST& aTree, Website sites[], int & numFound);
+bool exeRemoveSite(BST& aTree);
 bool exeRemoveTopic(BST& aTree);
 void exeAdd(BST& aTree);
-void exeDisplayTopic(BST& aTree);
-void exeRetrieve(BST& aTree, Website sites[], int & numFound);
-void exeEdit(BST & aTree);
+void exeRetrieve(BST& aTree);
 
 #endif

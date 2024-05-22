@@ -98,24 +98,32 @@ bool validInt(const int id, int num) {
 void exeMenu(int option, BST& aTree, Website sites[], int & numFound) {
 	switch(option) {
 		case 1:
+			exeAdd(aTree);
 			break;
 		case 2:
+			// FIXME: fix the removeSite function of the tree
+			if (exeRemoveSite(aTree)) {
+				cout << "Removal successful." << endl;
+			} else {
+				cout << "Removal not successful." << endl;
+			}
 			break;
 		case 3:
-			break;
-		case 4:
-			/*
+			// FIXME: fix the removeTopic function of the tree
 			if (exeRemoveTopic(aTree)) {
 				cout << "Removal successful." << endl;
 			} else {
 				cout << "Removal not successful." << endl;
 			}
-			*/
+			break;
+		case 4:
+			exeRetrieve(aTree);
 			break;
 		case 5:
 			aTree.display();
 			break;
 		case 6:
+			cout << "The tree height is " << aTree.height() << endl;
 			break;
 		case 7:
 			cout << "Thank you for using this program!" << endl;
@@ -126,6 +134,15 @@ void exeMenu(int option, BST& aTree, Website sites[], int & numFound) {
 	}
 }
 
+
+bool exeRemoveSite(BST& aTree) {
+	char key[MAX_CHAR];
+	cout << "Enter a site keyword (case sensitive & full key required): ";
+	cin.ignore(numeric_limits<streamsize>::max(), '\n'); // clear out input stream
+	cin.getline(key, MAX_CHAR, '\n');
+	return aTree.removeSite(key);
+}
+
 bool exeRemoveTopic(BST& aTree) {
 	char topic[MAX_CHAR];
 	cout << "Enter a topic: ";
@@ -134,49 +151,13 @@ bool exeRemoveTopic(BST& aTree) {
 	return aTree.removeTopic(topic);
 }
 
-/*
-// Name: 	exeEdit
-// Purpose: receives user input, then executes the edit public method for the Table object
-void exeEdit(BST& aTree) {
-	// Variables to read into
-	char topic[MAX_CHAR] = {'\0'};
-	char address[MAX_CHAR] = {'\0'};
-	char newReview[MAX_CHAR] = {'\0'};
-	int newRating = -1;
-
-	cin.ignore(numeric_limits<streamsize>::max(), '\n'); // clear out input stream
-
-	// Get user input
-	cout << "Enter the website's topic: ";
-	cin.getline(topic, MAX_CHAR, '\n');
-
-	cout << "Enter the website's address: ";
-	cin.getline(address, MAX_CHAR, '\n');
-
-	cout << "Enter your new review: ";
-	cin.getline(newReview, MAX_CHAR, '\n');
-
-	cout << "Enter your rating for this website: ";
-	newRating = getInt(RATING_OPTIONS);
-
-	// edit the entry
-	if (aTree.edit(topic, address, newReview, newRating)) {
-		cout << "Entry successfully edited. Updated table:" << endl;
-		aTree.display();
-	} else {
-		cout << "Unable to edit entry because a match was not found. "
-		   	 << "Please try again and double-check your topic and website address." << endl;
-	}
-}
-
-
-
 // Name: 	exeAdd
 // Purpose: receives user input, creates a new website, then adds it to the 
 // 			table object using the add public method 
 void exeAdd(BST& aTree) {
 	// Data members to read into
 	char topic[MAX_CHAR] = {'\0'};
+	char key[MAX_CHAR] = {'\0'};
 	char address[MAX_CHAR] = {'\0'};
 	char summary[MAX_CHAR] = {'\0'};
 	char review[MAX_CHAR] = {'\0'};
@@ -185,6 +166,9 @@ void exeAdd(BST& aTree) {
 	cin.ignore(numeric_limits<streamsize>::max(), '\n'); // clear out input stream
 
 	// Start input
+	cout << "Enter the website's keyword: ";
+	cin.getline(key, MAX_CHAR, '\n');
+
 	cout << "Enter the website's topic: ";
 	cin.getline(topic, MAX_CHAR, '\n');
 
@@ -201,48 +185,26 @@ void exeAdd(BST& aTree) {
 	rating = getInt(RATING_OPTIONS);
 
 	// Create the website with the parameterized constructor
-	Website aSite(topic, address, summary, review, rating);
+	Website aSite(topic, key, address, summary, review, rating);
 
 	// add site to the table
 	aTree.add(aSite);
 }
 
-
-
-// Name: 	exeDisplayTopic
-// Purpose: receives user input for a topic, then executes the public displayTopic 
-// 			function from the Table object.
-void exeDisplayTopic(BST& aTree) {
-	char topic[MAX_CHAR] = {'\0'};
-	cout << "Enter a topic: ";
-	cin.ignore(numeric_limits<streamsize>::max(), '\n'); // clear out input stream
-	cin.getline(topic, MAX_CHAR, '\n');
-	if (!aTree.displayTopic(topic)) {
-		cout << "The topic \"" << topic << "\" was not found." << endl;
-	}
-}
-
-
-
-
 // Name: 	exeRetrieve
-// Purpose: receives user input, then calls the Table object's public retrieve method to save
-// 			all matching entries to the sites array.
-void exeRetrieve(BST& aTree, Website sites[], int & numFound) {
-	char topic[MAX_CHAR] = {'\0'};
-	numFound = 0;
-	cout << "Enter a topic to retrieve: ";
+void exeRetrieve(BST& aTree) {
+	Website aSite;
+	char key[MAX_CHAR] = {'\0'};
+
+	cout << "Enter keyword of a site to retrieve (case sensitive & full key required): ";
 	cin.ignore(numeric_limits<streamsize>::max(), '\n'); // clear out input stream
-	cin.getline(topic, MAX_CHAR, '\n');
-	if (!aTree.retrieve(topic, sites, numFound)) {
-		cout << "The topic \"" << topic << "\" was not found and could not be " 
-			<< "saved into the array of websites." << endl;
+	cin.getline(key, MAX_CHAR, '\n');
+
+	if (!aTree.retrieve(key, aSite)) {
+		cout << "The site with the keyword \"" << key << "\" was not found." << endl; 
 	} else {
-		cout << "The topic \"" << topic << "\" has been found. All entries have "
-			<< "been saved into the array of websites:" << endl;
-		for (int i = 0; i < numFound; i++) {
-			cout << sites[i];
-		}
+		cout << "The site with the keyword \"" << key << "\" has been found." << endl;
+		cout << "The site data is as follows: " << endl;
+		cout << aSite;
 	}
 }
-*/

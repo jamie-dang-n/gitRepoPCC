@@ -1,8 +1,9 @@
 Topic;Key;Website;Summary;Review;Rating
-Anthropology;Anthro;anthro.com;a website about anthropology;very informative and interesting;5
-Media;Youtube;youtube.com;a place to share and host your own videos;a little boring;3
-Media;Instagram;instagram.com;a place to share your favorite photos;poor user design;1
-Media;Reddit;reddit.com;a forum to ask questions;confusing to use;2
 History;Historical Awesome;historicalawesome.com;an online history textbook;fun and interactive;1
+Media;Reddit;reddit.com;a forum to ask questions;confusing to use;2
 Computer Science;C Plus Plus Tutor;cplusplustutor.com;a code visualizer;incredibly useful for debugging;5
 Animals;National Geographic;netgeographic.org;national geographic's website;intriguing info;3
+Media;Youtube;youtube.com;a place to share and host your own videos;a little boring;3
+Anthropology;Anthro;anthro.com;a website about anthropology;very informative and interesting;5
+Media;Instagram;instagram.com;a place to share your favorite photos;poor user design;1
+

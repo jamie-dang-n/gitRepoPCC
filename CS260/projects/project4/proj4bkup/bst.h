@@ -21,10 +21,10 @@ class BST {
 		void loadFromFile(const char * fileName);
 		void add(const Website& aSite);
 		bool removeTopic(const char * topic);
-		void removeSite(const char * keyword);
-		void retrieve(const char * keyword);
+		bool removeSite(const char * keyword);
+		bool retrieve(const char * keyword, Website& aSite);
 		void display();
-		int monitor();
+		int height();
 
 		// Operator Overloads
 		const BST& operator= (const BST& aTree);
@@ -55,13 +55,15 @@ class BST {
 		// Private Methods (Helpers)
 		void add(Node *& currRoot, const Website& aSite);
 		void remove(Node *& currRoot, const char * key, Website& aSite);
-		void removeTopicR(const char * topic, Node * currRoot);
+		void removeTopicR(const char * topic, Node *& currRoot);
+		void removeSiteR(const char * keyword, Node *& currRoot);
 		void deleteNode(Node *& target);
 		void destroy(Node *& currRoot);
 		void copy(Node * srcRoot, Node *& destRoot);
 		void displayInorder(Node * currRoot) const;	
-		int monitorR(Node * currRoot) const;
+		int heightR(Node * currRoot) const;
 		void lowercase(char * temp);
+		Node* retrieveR(const char * keyword, Website& aSite, Node * currRoot);
 };
 
 #endif
