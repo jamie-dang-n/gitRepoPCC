@@ -1,0 +1,140 @@
+// Recursively count the number of nodes in the BST
+int numberOfNodes(node * root) {
+	if (!root) {
+		// base case: tree is empty
+		return 0;
+	} else {
+		// root exists, so the count is at least 1 + whatever 
+		// nodes are present in either subtree.
+		return numberOfNodes(root->left) + numberOfNodes(root->right) + 1;
+	}
+}
+
+// Recursively remove the node that contains the smallest value in the tree
+void removeSmallest(node *& root) {
+	// this is a BST, so the smallest value in the tree is the LEFTMOST value
+	if (root->left) {
+		removeSmallest(root->left);
+	} else {
+		deleteNode(root);
+	}
+}
+
+// Recursively remove all the nodes that contain even numbers in the tree
+int removeEven(node *& root) {
+	int num = 0;
+	if (root) {
+		// recursive case: root still exists, so keep traversing
+		// use postorder traversal to remove all even numbers
+		num = removeEven(root->left);
+		num += removeEven(root->right);
+
+		if (root->data % 2 == 0) {
+			deleteNode(root);
+			return num + 1;
+		}
+	}
+	return num;
+}
+
+// Helper function for deleting nodes in the BST
+void deleteNode (node *& target) {
+	if (!target->left && !target->right) {
+		// target node is a leaf
+		delete target;
+		target = nullptr;
+	} else if (!target->right) {
+		// target node only has left child
+		node * temp = target;
+		target = target->left;
+		delete temp;
+		temp = nullptr;
+	} else if (!target->left) {
+		// target node only has right child
+		node * temp = target;
+		target = target->right;
+		delete temp;
+		temp = nullptr;
+	} else {
+		// target has 2 children
+
+		// Find inorder successor of the target node (leftmost node of the right subtree)
+		node * prev = nullptr;
+		node * curr = target->right; // start in the right subtree
+		if (!curr->left) {
+			// not possible to traverse left, so the right child is the inorder successor
+			target->right = curr->right;
+		} else {
+			// traverse leftward as far as we can
+			while (curr->left) {
+				prev = curr;
+				curr = curr->left;
+			}
+			prev->left = curr->right; // relink
+		}
+		target->data = curr->data;
+		delete curr;
+		prev = nullptr;
+		curr = nullptr;
+	}
+}
+
+// Program Output
+Welcome to the Proficiency Demo!
+
+Inorder traversal: 5  8  15  48  71  75  81  100  100  119  135  146  201  203  210  225  234  
+
+Level 1: 135
+Level 2: 15 and 225
+Level 3: 8 and 71
+Level 4: 5
+Level 4: 48 and 119
+Level 5: 100
+Level 6: 75 and 100
+Level 7: 81
+Level 3: 203 and 234
+Level 4: 146 and 210
+Level 5: 201
+
+
+This tree contains 17 items 
+
+Jamie's Code Solutions
+
+Result of Call to numberOfNodes: 17
+
+Result of Call to removeSmallest: 
+
+The resulting tree after your function ran is: 
+Inorder traversal: 8  15  48  71  75  81  100  100  119  135  146  201  203  210  225  234  
+
+Level 1: 135
+Level 2: 15 and 225
+Level 3: 8 and 71
+Level 4: 48 and 119
+Level 5: 100
+Level 6: 75 and 100
+Level 7: 81
+Level 3: 203 and 234
+Level 4: 146 and 210
+Level 5: 201
+
+
+This tree contains 16 items 
+Result of Call to removeEven: 
+Number of nodes removed: 7
+
+The resulting tree after your function ran is: 
+Inorder traversal: 15  71  75  81  119  135  201  203  225  
+
+Level 1: 135
+Level 2: 15 and 225
+Level 3: 71
+Level 4: 119
+Level 5: 75
+Level 6: 81
+Level 3: 203
+Level 4: 201
+
+
+This tree contains 9 items 
