@@ -1,0 +1,99 @@
+//Recursively calculate the sum of all the leaf nodes (nodes that have no children) in the tree.
+int sumOfLeafNodes(node * root) {
+	int sum = 0;
+	if (root) {
+		// root exists, so traverse both sides (postorder) and increment if the node is a leaf
+		sum = sumOfLeafNodes(root->left);
+		sum += sumOfLeafNodes(root->right);
+
+		if (root->left == nullptr && root->right == nullptr) {
+			return sum + root->data;
+		}
+
+	}
+	return sum;
+}
+
+//Recursively copy all the nodes that contain even number in the source tree with root. 
+//newRoot is the root for destination tree. The destination tree should only contain 
+//the copies of the nodes that contain even number in the source tree.
+void copyEven(node * root, node *& newRoot) {
+	// this function will traverse in pre-order, checking the
+	// data in each node. if the data is even, we call add() for
+	// the newRoot tree.
+	if (root) {
+		if (root->data % 2 == 0) {
+			add(newRoot, root->data);
+		}
+		// the add function will traverse for us, so only change
+		// the root for the current tree so we can keep scanning for
+		// even numbers. add() can handle traversing through newRoot.
+		copyEven(root->left, newRoot);
+		copyEven(root->right, newRoot);
+	}
+
+}
+
+//Helper function to add data into newRoot for copyEven
+//the add function always adds new nodes as a leaf
+void add(node *& root, int num) {
+	if (!root) {
+		// reached end of branch, add new leaf
+		root = new node;
+		root->left = nullptr;
+		root->right = nullptr;
+		root->data = num;
+	} else if (num < root->data) {
+		add(root->left, num);
+	} else {
+		add(root->right, num);
+	}
+}
+
+// Program Output
+
+Welcome to the Proficiency Demo!
+
+Inorder traversal: 0  42  42  66  100  100  103  186  
+
+Level 1: 100
+Level 2: 42 and 103
+Level 3: 0 and 66
+Level 4: 42
+Level 3: 100 and 186
+
+
+This tree contains 8 items 
+
+Jamie's Code Solutions
+
+Called sumOfLeafNodes: The sum of all the values in the leaf nodes is 328
+
+Called copyEven on an empty tree: 
+Displaying the copied tree:
+
+The resulting tree after your function ran is: 
+Inorder traversal: 0  42  42  66  100  100  186  
+
+Level 1: 100
+Level 2: 42 and 100
+Level 3: 0 and 66
+Level 4: 42
+Level 3: 186
+
+
+This tree contains 7 items 
+
+Displaying original tree:
+
+The resulting tree after your function ran is: 
+Inorder traversal: 0  42  42  66  100  100  103  186  
+
+Level 1: 100
+Level 2: 42 and 103
+Level 3: 0 and 66
+Level 4: 42
+Level 3: 100 and 186
+
+
+This tree contains 8 items 
